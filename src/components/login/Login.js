@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Redirect} from 'react-router-dom';
 
 export default class Login extends Component {
   static propTypes = {
+    user: PropTypes.object,
     loginUser: PropTypes.func.isRequired
   };
 
@@ -32,6 +34,11 @@ export default class Login extends Component {
   };
 
   render() {
+    const {user} = this.props;
+    if (user) {
+      return <Redirect to="/profile"/>;
+    }
+
     return (
       <Form>
         <FormGroup>

@@ -5,9 +5,9 @@ import {selectUserState} from '../../selectors/userSelector';
 
 
 function mapStateToProps(state) {
-  const userState = selectUserState(state);
+  const {user} = selectUserState(state);
   return {
-    redirect: userState.registerRedirect
+    user
   };
 }
 

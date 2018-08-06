@@ -5,7 +5,9 @@ import {selectUserState} from '../../selectors/userSelector';
 
 
 function mapStateToProps(state) {
+  const {user} = selectUserState(state);
   return {
+    user
   };
 }
 

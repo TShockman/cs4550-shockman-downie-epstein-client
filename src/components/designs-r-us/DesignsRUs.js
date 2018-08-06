@@ -6,6 +6,7 @@ import DesignsRUsNav from './DesignsRUsNav';
 import Homepage from '../homepage/HomepageContainer';
 import Register from '../register/RegisterContainer';
 import Login from '../login/LoginContainer'
+import Profile from '../profile/ProfileContainer';
 
 // import styling
 import 'bootstrap/dist/css/bootstrap.css';
@@ -23,6 +24,7 @@ export default class DesignsRUs extends Component {
                 <Route exact path="/" component={Homepage}/>
                 <Route path="/register" component={Register}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/profile" component={Profile}/>
                 <Redirect to="/"/>
               </Switch>
             </div>

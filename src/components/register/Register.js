@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Redirect} from 'react-router-dom';
 
 export default class Register extends Component {
   static propTypes = {
+    user: PropTypes.object,
     registerUser: PropTypes.func.isRequired
   };
 
@@ -40,8 +42,13 @@ export default class Register extends Component {
   };
 
   render() {
+    const {user} = this.props;
+    if (user) {
+      return <Redirect to="/profile"/>;
+    }
+
     return (
-      <Form onSubmit={() => console.log('Submitted!')}>
+      <Form>
         <FormGroup>
           <Label for="username">Username</Label>
           <Input onChange={this.handleFormUpdate} id="username" name="username" placeholder="Jane_Doe"/>
