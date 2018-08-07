@@ -5,7 +5,7 @@ import Loading from '../common/Loading';
 export default class Listing extends PureComponent {
   static propTypes = {
     getListing: PropTypes.func.isRequired,
-    listings: PropTypes.object,
+    listings: PropTypes.array,
     currentListing: PropTypes.object,
     match: PropTypes.object.isRequired //router
   };

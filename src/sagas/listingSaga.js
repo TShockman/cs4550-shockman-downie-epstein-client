@@ -1,7 +1,7 @@
-import {takeEvery, put, fork, all, call, select} from 'redux-saga/effects';
+import {takeEvery, takeLatest, put, fork, all, call, select} from 'redux-saga/effects';
 import {
   CREATE_LISTING_FULFILLED,
-  CREATE_LISTING_REQUESTED,
+  CREATE_LISTING_REQUESTED, GET_ALL_LISTINGS_FULFILLED, GET_ALL_LISTINGS_REQUESTED,
   GET_LISTING_FULFILLED,
   GET_LISTING_REQUESTED
 } from '../actions/listingActions';
@@ -41,9 +41,22 @@ function * createListingSaga({listing}) {
   }
 }
 
+function * getAllListingsSaga() {
+  console.log('Getting all listings');
+
+  const listings = yield call(listingService.getAllListings);
+
+  if (listings) {
+    yield put({type: GET_ALL_LISTINGS_FULFILLED, listings});
+  } else {
+    console.error('Failed to fetch listings');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_LISTING_REQUESTED, getListingSaga),
-    fork(takeEvery, CREATE_LISTING_REQUESTED, createListingSaga)
+    fork(takeEvery, CREATE_LISTING_REQUESTED, createListingSaga),
+    fork(takeLatest, GET_ALL_LISTINGS_REQUESTED, getAllListingsSaga)
   ])
 }
