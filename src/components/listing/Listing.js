@@ -16,12 +16,6 @@ export default class Listing extends PureComponent {
     const {getListing, match} = this.props;
     getListing(match.params.lid);
   };
-s
-  handleDelete = () => {
-    const {history, currentListing} = this.props;
-    deleteListing(currentListing.id);
-    history.push('/');
-  };
 
   render() {
     const {match, currentListing} = this.props;
