@@ -41,4 +41,11 @@ export default class ListingService {
     return fetch(`${LISTING_URL}/${lid}`)
       .then(parseResponse);
   }
+
+  deleteListing(lid) {
+    return fetch(`${LISTING_URL}/${lid}`, {
+      method: 'delete'
+    })
+      .then(response => response.ok);
+  }
 }

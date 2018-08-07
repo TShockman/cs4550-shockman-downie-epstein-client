@@ -1,22 +1,30 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../common/Loading';
+import {Button} from 'reactstrap';
 
 export default class Listing extends PureComponent {
   static propTypes = {
     getListing: PropTypes.func.isRequired,
     listings: PropTypes.array,
     currentListing: PropTypes.object,
-    match: PropTypes.object.isRequired //router
+    match: PropTypes.object.isRequired, //router,
+    history: PropTypes.object.isRequired, //router
   };
 
   componentDidMount = () => {
     const {getListing, match} = this.props;
     getListing(match.params.lid);
   };
+s
+  handleDelete = () => {
+    const {history, currentListing} = this.props;
+    deleteListing(currentListing.id);
+    history.push('/');
+  };
 
   render() {
-    const {listings, match, currentListing} = this.props;
+    const {match, currentListing} = this.props;
 
     if (!currentListing || String(currentListing.id) !== match.params.lid) {
       return <Loading/>

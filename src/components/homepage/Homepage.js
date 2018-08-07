@@ -24,7 +24,7 @@ export default class Homepage extends Component {
           <ListGroupItem key={listing.id}>
             {listing.title}
             <Link to={`/listing/${listing.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
-            </ListGroupItem>
+          </ListGroupItem>
           ))}
       </ListGroup>
     );

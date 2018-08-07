@@ -1,5 +1,6 @@
 import {Record} from 'immutable';
 import {DELETE_PROFILE, GET_PROFILE_FULFILLED, LOGIN_USER_FULFILLED, LOGOUT} from '../actions/userActions';
+import {DELETE_LISTING_FULFILLED} from '../actions/listingActions';
 
 const UserState = Record({
   user: null
@@ -15,6 +16,11 @@ export default (state = initialState, action) => {
     case LOGOUT:
     case DELETE_PROFILE:
       return state.set('user', null);
+    case DELETE_LISTING_FULFILLED: {
+      const user = state.user;
+      user.listings = user.listings.filter(listing => listing.id !== action.lid);
+      return state.set('user', user);
+    }
     default: {
       return state;
     }

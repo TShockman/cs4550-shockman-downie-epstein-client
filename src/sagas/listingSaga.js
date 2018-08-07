@@ -1,9 +1,15 @@
 import {takeEvery, takeLatest, put, fork, all, call, select} from 'redux-saga/effects';
 import {
   CREATE_LISTING_FULFILLED,
-  CREATE_LISTING_REQUESTED, GET_ALL_LISTINGS_FULFILLED, GET_ALL_LISTINGS_REQUESTED,
+  CREATE_LISTING_REQUESTED,
+  DELETE_LISTING_FULFILLED,
+  DELETE_LISTING_REQUESTED,
+  GET_ALL_LISTINGS_FULFILLED,
+  GET_ALL_LISTINGS_REQUESTED,
   GET_LISTING_FULFILLED,
-  GET_LISTING_REQUESTED
+  GET_LISTING_REQUESTED,
+  GET_USER_LISTINGS_FULFILLED,
+  GET_USER_LISTINGS_REQUESTED
 } from '../actions/listingActions';
 import ListingService from '../services/ListingService';
 import {redirect} from '../actions/navigationActions';
@@ -53,10 +59,36 @@ function * getAllListingsSaga() {
   }
 }
 
+function * getUserListingsSaga({user}) {
+  console.log('Getting listings for user:', user.id);
+
+  const listings = yield call(listingService.getAllListingsForUser, user);
+
+  if (listings) {
+    yield put({type: GET_USER_LISTINGS_FULFILLED, listings});
+  } else {
+    console.error('Failed to retrieve listings');
+  }
+}
+
+function * deleteListingSaga({lid}) {
+  console.log('Deleting listing:', lid);
+
+  const success = yield call(listingService.deleteListing, lid);
+
+  if (success) {
+    yield put({type: DELETE_LISTING_FULFILLED, lid});
+  } else {
+    console.error('Failed to delete listing');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_LISTING_REQUESTED, getListingSaga),
     fork(takeEvery, CREATE_LISTING_REQUESTED, createListingSaga),
-    fork(takeLatest, GET_ALL_LISTINGS_REQUESTED, getAllListingsSaga)
+    fork(takeLatest, GET_ALL_LISTINGS_REQUESTED, getAllListingsSaga),
+    fork(takeLatest, GET_USER_LISTINGS_REQUESTED, getUserListingsSaga),
+    fork(takeLatest, DELETE_LISTING_REQUESTED, deleteListingSaga)
   ])
 }

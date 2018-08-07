@@ -10,7 +10,7 @@ function mapStateToProps(state) {
     listings,
     currentListing
   };
-}
+} 
 
 function mapDispatchToProps(dispatch) {
   return {
