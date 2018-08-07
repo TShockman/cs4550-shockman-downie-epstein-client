@@ -4,13 +4,14 @@ import {
   DELETE_LISTING_REQUESTED,
   GET_ALL_LISTINGS_FULFILLED, GET_ALL_LISTINGS_REQUESTED,
   GET_LISTING_FULFILLED, GET_LISTING_REQUESTED,
-  GET_USER_LISTINGS_FULFILLED, GET_USER_LISTINGS_REQUESTED
+  GET_USER_LISTINGS_FULFILLED, GET_USER_LISTINGS_REQUESTED, QUERY_LISTING_FULFILLED
 } from '../actions/listingActions';
 
 const ListingState = Record({
   listings: [], // list of listings
   currentListing: null, // the current listing
-  currentListings: []
+  currentListings: [],
+  listingsSearchResult: []
 });
 
 const initialState = new ListingState();
@@ -43,6 +44,10 @@ export default (state = initialState, action) => {
       state = state.set('currentListings', state.currentListings.filter(listing => listing.id !== lid));
       state = state.set('currentListing', state.currentListing && state.currentListing.id === lid ? null : state.currentListing);
       return state;
+    }
+    case QUERY_LISTING_FULFILLED: {
+      const {listings} = action;
+      return state.set('listingsSearchResult', listings);
     }
     default: {
       return state;

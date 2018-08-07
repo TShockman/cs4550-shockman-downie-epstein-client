@@ -9,6 +9,7 @@ import Login from '../login/LoginContainer'
 import Profile from '../profile/ProfileContainer';
 import NewListing from '../new-listing/NewListingContainer';
 import Listing from '../listing/ListingContainer';
+import Listings from '../listings/ListingsContainer';
 
 // import styling
 import 'bootstrap/dist/css/bootstrap.css';
@@ -27,6 +28,7 @@ export default class DesignsRUs extends Component {
                 <Route path="/register" component={Register}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/profile" component={Profile}/>
+                <Route path="/listing/search" component={Listings}/>
                 <Route exact path="/listing/new" component={NewListing}/>
                 <Route path="/listing/:lid" component={Listing}/>
                 <Redirect to="/"/>

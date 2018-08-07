@@ -1,4 +1,4 @@
-import {LISTING_URL, parseResponse, USER_URL} from './api';
+import {LISTING_QUERY_URL, LISTING_URL, parseResponse, USER_URL} from './api';
 
 const _singleton = Symbol();
 
@@ -47,5 +47,16 @@ export default class ListingService {
       method: 'delete'
     })
       .then(response => response.ok);
+  }
+
+  searchListings(query) {
+    console.log('searching', query);
+    return fetch(LISTING_QUERY_URL, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/text'
+      },
+      body: query
+    }).then(parseResponse);
   }
 }

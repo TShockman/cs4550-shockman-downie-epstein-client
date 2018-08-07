@@ -9,7 +9,7 @@ import {
   GET_LISTING_FULFILLED,
   GET_LISTING_REQUESTED,
   GET_USER_LISTINGS_FULFILLED,
-  GET_USER_LISTINGS_REQUESTED
+  GET_USER_LISTINGS_REQUESTED, QUERY_LISTING_FULFILLED, QUERY_LISTING_REQUESTED
 } from '../actions/listingActions';
 import ListingService from '../services/ListingService';
 import {redirect} from '../actions/navigationActions';
@@ -83,12 +83,25 @@ function * deleteListingSaga({lid}) {
   }
 }
 
+function * queryListingSaga({query}) {
+  console.log('Querying listings:', query);
+
+  const listings = yield call(listingService.searchListings, query);
+
+  if (listings) {
+    yield put({type: QUERY_LISTING_FULFILLED, listings});
+  } else {
+    console.error('Failed to query listings');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_LISTING_REQUESTED, getListingSaga),
     fork(takeEvery, CREATE_LISTING_REQUESTED, createListingSaga),
     fork(takeLatest, GET_ALL_LISTINGS_REQUESTED, getAllListingsSaga),
     fork(takeLatest, GET_USER_LISTINGS_REQUESTED, getUserListingsSaga),
-    fork(takeLatest, DELETE_LISTING_REQUESTED, deleteListingSaga)
+    fork(takeLatest, DELETE_LISTING_REQUESTED, deleteListingSaga),
+    fork(takeLatest, QUERY_LISTING_REQUESTED, queryListingSaga)
   ])
 }
