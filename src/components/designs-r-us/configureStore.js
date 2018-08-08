@@ -12,9 +12,11 @@ export default (initialState, context = {}) => {
   const enhancers = [
     applyMiddleware(
       sagaMiddleware,
-    ),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    )
   ];
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__)
+  }
 
   const store = createStore(baseReducer, initialState, compose(...enhancers));
   sagaMiddleware.run(baseSaga);
