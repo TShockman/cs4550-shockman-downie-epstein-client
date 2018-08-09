@@ -9,13 +9,30 @@ export default class Homepage extends Component {
     workRequests: PropTypes.array,
     blogPosts: PropTypes.array,
     getListings: PropTypes.func.isRequired,
-    getWorkRequests: PropTypes.func.isRequired
+    getWorkRequests: PropTypes.func.isRequired,
+    getBlogPosts: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
     this.props.getListings();
     this.props.getWorkRequests();
+    this.props.getBlogPosts();
   };
+
+  getBlogPosts() {
+    const {blogPosts} = this.props;
+
+    return (
+      <ListGroup>
+        {blogPosts.map(blogPost => (
+          <ListGroupItem key={blogPost.id}>
+            {blogPost.title}
+            <Link to={`/blogPost/${blogPost.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
+          </ListGroupItem>
+        ))}
+      </ListGroup>
+    );
+  }
 
   getListings() {
     const {listings} = this.props;
@@ -61,6 +78,7 @@ export default class Homepage extends Component {
           </Col>
           <Col>
             <h2>Blog Posts</h2>
+            {this.getBlogPosts()};
           </Col>
         </Row>
       </div>

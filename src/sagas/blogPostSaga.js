@@ -1,0 +1,109 @@
+import {takeEvery, takeLatest, put, fork, all, call, select} from 'redux-saga/effects';
+import {
+  CREATE_BLOG_POST_FULFILLED,
+  CREATE_BLOG_POST_REQUESTED,
+  DELETE_BLOG_POST_FULFILLED,
+  DELETE_BLOG_POST_REQUESTED,
+  GET_ALL_BLOG_POSTS_FULFILLED,
+  GET_ALL_BLOG_POSTS_REQUESTED,
+  GET_BLOG_POST_FULFILLED,
+  GET_BLOG_POST_REQUESTED,
+  GET_USER_BLOG_POSTS_FULFILLED,
+  GET_USER_BLOG_POSTS_REQUESTED, QUERY_BLOG_POST_FULFILLED, QUERY_BLOG_POST_REQUESTED
+} from '../actions/blogPostActions';
+import BlogPostService from '../services/BlogPostService';
+import {redirect} from '../actions/navigationActions';
+import {selectUserState} from '../selectors/userSelector';
+import {GET_PROFILE_REQUESTED} from '../actions/userActions';
+
+const blogPostService = BlogPostService.instance;
+
+
+function * getBlogPostSaga({bpid}) {
+  console.log('Getting blogPost:', bpid);
+  const blogPost = yield call(blogPostService.getBlogPost, bpid);
+
+  if (blogPost) {
+    yield put({type: GET_BLOG_POST_FULFILLED, blogPost});
+  } else {
+    console.error('Failed to retrieve blogPost');
+  }
+}
+
+function * createBlogPostSaga({blogPost}) {
+  console.log('Creating blogPost:', blogPost);
+  const {user} = yield select(selectUserState);
+
+  if (!user) {
+    return console.error('Must be logged in to create a blogPost');
+  }
+
+  const newBlogPost = yield call(blogPostService.createBlogPostForUser, user, blogPost);
+
+  if (newBlogPost) {
+    yield put({type: CREATE_BLOG_POST_FULFILLED, blogPost: newBlogPost});
+    yield put(redirect(`/blogPost/${newBlogPost.id}`));
+  } else {
+    console.error('Failed to create blogPost');
+  }
+}
+
+function * getAllBlogPostsSaga() {
+  console.log('Getting all blogPosts');
+
+  const blogPosts = yield call(blogPostService.getAllBlogPosts);
+
+  if (blogPosts) {
+    yield put({type: GET_ALL_BLOG_POSTS_FULFILLED, blogPosts});
+  } else {
+    console.error('Failed to fetch blogPosts');
+  }
+}
+
+function * getUserBlogPostsSaga({user}) {
+  console.log('Getting blogPosts for user:', user.id);
+
+  const blogPosts = yield call(blogPostService.getAllBlogPostsForUser, user);
+
+  if (blogPosts) {
+    yield put({type: GET_USER_BLOG_POSTS_FULFILLED, blogPosts});
+  } else {
+    console.error('Failed to retrieve blogPosts');
+  }
+}
+
+function * deleteBlogPostSaga({bpid}) {
+  console.log('Deleting blogPost:', bpid);
+
+  const success = yield call(blogPostService.deleteBlogPost, bpid);
+
+  if (success) {
+    yield put({type: DELETE_BLOG_POST_FULFILLED, bpid});
+    yield put({type: GET_PROFILE_REQUESTED});
+  } else {
+    console.error('Failed to delete blogPost');
+  }
+}
+
+function * queryBlogPostSaga({query}) {
+  console.log('Querying blogPosts:', query);
+
+  const blogPosts = yield call(blogPostService.searchBlogPosts, query);
+
+  if (blogPosts) {
+    yield put({type: QUERY_BLOG_POST_FULFILLED, blogPosts});
+  } else {
+    console.error('Failed to query blogPosts');
+  }
+}
+
+export default function * rootSaga () {
+  yield all([
+    fork(takeEvery, GET_BLOG_POST_REQUESTED, getBlogPostSaga),
+    fork(takeEvery, CREATE_BLOG_POST_REQUESTED, createBlogPostSaga),
+    fork(takeLatest, GET_ALL_BLOG_POSTS_REQUESTED, getAllBlogPostsSaga),
+    fork(takeLatest, GET_USER_BLOG_POSTS_REQUESTED, getUserBlogPostsSaga),
+    fork(takeLatest, DELETE_BLOG_POST_REQUESTED, deleteBlogPostSaga),
+    fork(takeLatest, QUERY_BLOG_POST_REQUESTED, queryBlogPostSaga)
+  ])
+}

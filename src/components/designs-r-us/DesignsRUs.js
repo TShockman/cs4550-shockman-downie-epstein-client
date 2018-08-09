@@ -13,6 +13,9 @@ import Listings from '../listing/listings/ListingsContainer';
 import NewWorkRequest from '../work-request/new-work-request/NewWorkRequestContainer';
 import WorkRequest from '../work-request/work-request/WorkRequestContainer';
 import WorkRequests from '../work-request/work-requests/WorkRequestsContainer';
+import NewBlogPost from '../blog-post/new-blog-post/NewBlogPostContainer';
+import BlogPost from '../blog-post/blog-post/BlogPostContainer';
+import BlogPosts from '../blog-post/blog-posts/BlogPostsContainer';
 
 // import styling
 import 'bootstrap/dist/css/bootstrap.css';
@@ -36,7 +39,10 @@ export default class DesignsRUs extends Component {
                 <Route path="/listing/:lid" component={Listing}/>
                 <Route path="/workRequest/search" component={WorkRequests}/>
                 <Route exact path="/workRequest/new" component={NewWorkRequest}/>
-                <Route path="/workRequest/:lid" component={WorkRequest}/>
+                <Route path="/workRequest/:wrid" component={WorkRequest}/>
+                <Route path="/blogPost/search" component={BlogPosts}/>
+                <Route exact path="/blogPost/new" component={NewBlogPost}/>
+                <Route path="/blogPost/:bpid" component={BlogPost}/>
                 <Redirect to="/"/>
               </Switch>
             </div>

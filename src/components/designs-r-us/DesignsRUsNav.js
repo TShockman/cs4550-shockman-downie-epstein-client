@@ -33,6 +33,9 @@ export default class DesignsRUsNav extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
+                <Link className="nav-link" to="/blogPost/search">Search Blog Posts</Link>
+              </NavItem>
+              <NavItem>
                 <Link className="nav-link" to="/listing/search">Search Listings</Link>
               </NavItem>
               <NavItem>

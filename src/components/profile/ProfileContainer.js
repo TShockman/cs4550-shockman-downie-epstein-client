@@ -5,6 +5,7 @@ import {selectUserState} from '../../selectors/userSelector';
 import {DELETE_LISTING_REQUESTED, GET_USER_LISTINGS_REQUESTED} from '../../actions/listingActions';
 import {selectListingState} from '../../selectors/listingSelector';
 import {DELETE_WORK_REQUEST_REQUESTED} from '../../actions/workRequestActions';
+import {DELETE_BLOG_POST_REQUESTED} from '../../actions/blogPostActions';
 
 
 function mapStateToProps(state) {
@@ -36,6 +37,10 @@ function mapDispatchToProps(dispatch) {
     deleteWorkRequest: wrid => dispatch({
       type: DELETE_WORK_REQUEST_REQUESTED,
       wrid
+    }),
+    deleteBlogPost: bpid => dispatch({
+      type: DELETE_BLOG_POST_REQUESTED,
+      bpid
     })
   }
 }

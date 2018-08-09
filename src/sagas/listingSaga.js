@@ -14,6 +14,7 @@ import {
 import ListingService from '../services/ListingService';
 import {redirect} from '../actions/navigationActions';
 import {selectUserState} from '../selectors/userSelector';
+import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 
 const listingService = ListingService.instance;
 
@@ -78,6 +79,7 @@ function * deleteListingSaga({lid}) {
 
   if (success) {
     yield put({type: DELETE_LISTING_FULFILLED, lid});
+    yield put({type: GET_PROFILE_REQUESTED});
   } else {
     console.error('Failed to delete listing');
   }

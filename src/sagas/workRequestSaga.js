@@ -14,6 +14,7 @@ import {
 import WorkRequestService from '../services/WorkRequestService';
 import {redirect} from '../actions/navigationActions';
 import {selectUserState} from '../selectors/userSelector';
+import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 
 const workRequestService = WorkRequestService.instance;
 
@@ -78,6 +79,7 @@ function * deleteWorkRequestSaga({wrid}) {
 
   if (success) {
     yield put({type: DELETE_WORK_REQUEST_FULFILLED, wrid});
+    yield put({type: GET_PROFILE_REQUESTED});
   } else {
     console.error('Failed to delete workRequest');
   }

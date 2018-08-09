@@ -11,11 +11,25 @@ export default class Profile extends Component {
     logout: PropTypes.func.isRequired,
     deleteAccount: PropTypes.func.isRequired,
     deleteListing: PropTypes.func.isRequired,
-    deleteWorkRequest: PropTypes.func.isRequired
+    deleteWorkRequest: PropTypes.func.isRequired,
+    deleteBlogPost: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
     this.props.getProfile();
+  };
+
+  getBlogPosts = () => {
+    const {user, deleteBlogPost} = this.props;
+    return user.blogPosts.map(blogPost => (
+      <ListGroupItem key={blogPost.id}>
+        {blogPost.title}
+        <span className="float-right">
+          <Button color="danger" onClick={() => deleteBlogPost(blogPost.id)}><i className="fa fa-trash"/></Button>
+          <Link to={`/blogPost/${blogPost.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
+        </span>
+      </ListGroupItem>
+    ));
   };
 
   getWorkRequests = () => {
@@ -73,7 +87,7 @@ export default class Profile extends Component {
           }
           {user.role === 'CLIENT' &&
             <Col>
-                <h3>My Work Requests</h3>
+              <h3>My Work Requests</h3>
               <ListGroup>
                 <ListGroupItem>
                   <Link to="/workRequest/new">Create New Work Request</Link>
@@ -85,6 +99,12 @@ export default class Profile extends Component {
           {user.role === 'ADMIN' &&
           <Col>
             <h3>My Blog Posts</h3>
+            <ListGroup>
+              <ListGroupItem>
+                <Link to="/blogPost/new">Create New Blog Post</Link>
+              </ListGroupItem>
+              {this.getBlogPosts()}
+            </ListGroup>
           </Col>
           }
         </Row>

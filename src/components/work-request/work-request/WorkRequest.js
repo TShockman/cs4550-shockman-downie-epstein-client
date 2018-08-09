@@ -13,7 +13,7 @@ export default class WorkRequest extends PureComponent {
 
   componentDidMount = () => {
     const {getWorkRequest, match} = this.props;
-    getWorkRequest(match.params.lid);
+    getWorkRequest(match.params.wrid);
   };
 
   render() {

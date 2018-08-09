@@ -6,6 +6,8 @@ import {selectListingState} from '../../selectors/listingSelector';
 import {GET_ALL_LISTINGS_REQUESTED} from '../../actions/listingActions';
 import {selectWorkRequestState} from '../../selectors/workRequestSelector';
 import {GET_ALL_WORK_REQUESTS_REQUESTED} from '../../actions/workRequestActions';
+import {selectBlogPostState} from '../../selectors/blogPostSelector';
+import {GET_ALL_BLOG_POSTS_REQUESTED} from '../../actions/blogPostActions';
 
 
 function mapStateToProps(state) {
@@ -13,10 +15,12 @@ function mapStateToProps(state) {
   const listings = Object.keys(listingState.listings).map(key => listingState.listings[key]);
   const workRequestState = selectWorkRequestState(state);
   const workRequests = Object.keys(workRequestState.workRequests).map(key => workRequestState.workRequests[key]);
+  const blogPostState = selectBlogPostState(state);
+  const blogPosts = Object.keys(blogPostState.blogPosts).map(key => blogPostState.blogPosts[key]);
   return {
     listings,
     workRequests,
-    blogPosts: []
+    blogPosts
   };
 }
 
@@ -27,6 +31,9 @@ function mapDispatchToProps(dispatch) {
     }),
     getWorkRequests: () => dispatch({
       type: GET_ALL_WORK_REQUESTS_REQUESTED
+    }),
+    getBlogPosts: () => dispatch({
+      type: GET_ALL_BLOG_POSTS_REQUESTED
     })
   };
 }
