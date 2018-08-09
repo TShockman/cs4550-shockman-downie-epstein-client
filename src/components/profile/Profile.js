@@ -10,11 +10,25 @@ export default class Profile extends Component {
     getProfile: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
     deleteAccount: PropTypes.func.isRequired,
-    deleteListing: PropTypes.func.isRequired
+    deleteListing: PropTypes.func.isRequired,
+    deleteWorkRequest: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
     this.props.getProfile();
+  };
+
+  getWorkRequests = () => {
+    const {user, deleteWorkRequest} = this.props;
+    return user.workRequests.map(workRequest => (
+      <ListGroupItem key={workRequest.id}>
+        {workRequest.title}
+        <span className="float-right">
+          <Button color="danger" onClick={() => deleteWorkRequest(workRequest.id)}><i className="fa fa-trash"/></Button>
+          <Link to={`/workRequest/${workRequest.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
+        </span>
+      </ListGroupItem>
+    ));
   };
 
   getListings = () => {
@@ -60,6 +74,12 @@ export default class Profile extends Component {
           {user.role === 'CLIENT' &&
             <Col>
                 <h3>My Work Requests</h3>
+              <ListGroup>
+                <ListGroupItem>
+                  <Link to="/workRequest/new">Create New Work Request</Link>
+                </ListGroupItem>
+                {this.getWorkRequests()}
+              </ListGroup>
             </Col>
           }
           {user.role === 'ADMIN' &&

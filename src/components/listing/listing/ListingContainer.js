@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import Listing from './Listing';
-import {selectListingState} from '../../selectors/listingSelector';
-import {GET_LISTING_REQUESTED} from '../../actions/listingActions';
+import {selectListingState} from '../../../selectors/listingSelector';
+import {GET_LISTING_REQUESTED} from '../../../actions/listingActions';
 
 
 function mapStateToProps(state) {

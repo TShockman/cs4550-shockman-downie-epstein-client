@@ -1,4 +1,4 @@
-import {parseResponse, USER_URL, WORK_REQUEST_URL} from './api';
+import {parseResponse, USER_URL, WORK_REQUEST_QUERY_URL, WORK_REQUEST_URL} from './api';
 
 const _singleton = Symbol();
 
@@ -35,6 +35,29 @@ export default class WorkRequestService {
       body: JSON.stringify(workRequest)
     })
       .then(parseResponse);
+  }
+
+  getWorkRequest(wrid) {
+    return fetch(`${WORK_REQUEST_URL}/${wrid}`)
+      .then(parseResponse);
+  }
+
+  deleteWorkRequest(wrid) {
+    return fetch(`${WORK_REQUEST_URL}/${wrid}`, {
+      method: 'delete'
+    })
+      .then(response => response.ok);
+  }
+
+  searchWorkRequests(query) {
+    console.log('searching', query);
+    return fetch(WORK_REQUEST_QUERY_URL, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/text'
+      },
+      body: query
+    }).then(parseResponse);
   }
 
 }

@@ -7,9 +7,12 @@ import Homepage from '../homepage/HomepageContainer';
 import Register from '../register/RegisterContainer';
 import Login from '../login/LoginContainer'
 import Profile from '../profile/ProfileContainer';
-import NewListing from '../new-listing/NewListingContainer';
-import Listing from '../listing/ListingContainer';
-import Listings from '../listings/ListingsContainer';
+import NewListing from '../listing/new-listing/NewListingContainer';
+import Listing from '../listing/listing/ListingContainer';
+import Listings from '../listing/listings/ListingsContainer';
+import NewWorkRequest from '../work-request/new-work-request/NewWorkRequestContainer';
+import WorkRequest from '../work-request/work-request/WorkRequestContainer';
+import WorkRequests from '../work-request/work-requests/WorkRequestsContainer';
 
 // import styling
 import 'bootstrap/dist/css/bootstrap.css';
@@ -31,6 +34,9 @@ export default class DesignsRUs extends Component {
                 <Route path="/listing/search" component={Listings}/>
                 <Route exact path="/listing/new" component={NewListing}/>
                 <Route path="/listing/:lid" component={Listing}/>
+                <Route path="/workRequest/search" component={WorkRequests}/>
+                <Route exact path="/workRequest/new" component={NewWorkRequest}/>
+                <Route path="/workRequest/:lid" component={WorkRequest}/>
                 <Redirect to="/"/>
               </Switch>
             </div>

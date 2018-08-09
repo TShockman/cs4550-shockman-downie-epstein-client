@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import Loading from '../common/Loading';
-import {Button} from 'reactstrap';
+import Loading from '../../common/Loading';
 
 export default class Listing extends PureComponent {
   static propTypes = {

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
-import {selectListingState} from '../../selectors/listingSelector';
-import {QUERY_LISTING_REQUESTED} from '../../actions/listingActions';
+import {selectListingState} from '../../../selectors/listingSelector';
+import {QUERY_LISTING_REQUESTED} from '../../../actions/listingActions';
 import Listings from './Listings';
 
 

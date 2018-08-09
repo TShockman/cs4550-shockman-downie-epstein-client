@@ -8,11 +8,13 @@ export default class Homepage extends Component {
     listings: PropTypes.array,
     workRequests: PropTypes.array,
     blogPosts: PropTypes.array,
-    getListings: PropTypes.func.isRequired
+    getListings: PropTypes.func.isRequired,
+    getWorkRequests: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
-    this.props.getListings()
+    this.props.getListings();
+    this.props.getWorkRequests();
   };
 
   getListings() {
@@ -30,6 +32,21 @@ export default class Homepage extends Component {
     );
   }
 
+  getWorkRequests() {
+    const {workRequests} = this.props;
+
+    return (
+      <ListGroup>
+        {workRequests.map(workRequest => (
+          <ListGroupItem key={workRequest.id}>
+            {workRequest.title}
+            <Link to={`/workRequest/${workRequest.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
+          </ListGroupItem>
+        ))}
+      </ListGroup>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -40,6 +57,7 @@ export default class Homepage extends Component {
           </Col>
           <Col>
             <h2>Work Requests</h2>
+            {this.getWorkRequests()}
           </Col>
           <Col>
             <h2>Blog Posts</h2>

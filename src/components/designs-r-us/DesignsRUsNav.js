@@ -36,6 +36,9 @@ export default class DesignsRUsNav extends Component {
                 <Link className="nav-link" to="/listing/search">Search Listings</Link>
               </NavItem>
               <NavItem>
+                <Link className="nav-link" to="/workRequest/search">Search Work Requests</Link>
+              </NavItem>
+              <NavItem>
                 <Link className="nav-link" to="/login">Login</Link>
               </NavItem>
               <NavItem>

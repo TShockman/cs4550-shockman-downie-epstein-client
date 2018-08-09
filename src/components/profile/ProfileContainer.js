@@ -4,14 +4,13 @@ import Profile from './Profile';
 import {selectUserState} from '../../selectors/userSelector';
 import {DELETE_LISTING_REQUESTED, GET_USER_LISTINGS_REQUESTED} from '../../actions/listingActions';
 import {selectListingState} from '../../selectors/listingSelector';
+import {DELETE_WORK_REQUEST_REQUESTED} from '../../actions/workRequestActions';
 
 
 function mapStateToProps(state) {
   const {user} = selectUserState(state);
-  const {currentListings} = selectListingState(state);
   return {
-    user,
-    userListings: currentListings
+    user
   };
 }
 
@@ -33,6 +32,10 @@ function mapDispatchToProps(dispatch) {
     deleteListing: lid => dispatch({
       type: DELETE_LISTING_REQUESTED,
       lid
+    }),
+    deleteWorkRequest: wrid => dispatch({
+      type: DELETE_WORK_REQUEST_REQUESTED,
+      wrid
     })
   }
 }
