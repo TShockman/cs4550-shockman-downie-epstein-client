@@ -50,7 +50,6 @@ export default class BlogPostService {
   }
 
   searchBlogPosts(query) {
-    console.log('searching', query);
     return fetch(BLOG_POST_QUERY_URL, {
       method: 'post',
       headers: {
@@ -58,5 +57,16 @@ export default class BlogPostService {
       },
       body: query
     }).then(parseResponse);
+  }
+
+  addComment(comment, bpid) {
+    return fetch(`${BLOG_POST_URL}/${bpid}/comment`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(comment)
+    }).then(parseResponse)
   }
 }

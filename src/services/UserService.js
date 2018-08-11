@@ -1,4 +1,4 @@
-import {LOGIN_URL, LOGOUT_URL, parseResponse, PROFILE_URL, USER_URL} from './api';
+import {LOGIN_URL, LOGOUT_URL, parseResponse, PROFILE_BP_URL, PROFILE_URL, USER_URL} from './api';
 
 const _singleton = Symbol();
 
@@ -60,5 +60,12 @@ export default class UserService {
       method: 'delete',
       credentials: 'include'
     }).then(response => response.ok);
+  }
+
+  getProfileBlogPosts() {
+    return fetch(PROFILE_BP_URL, {
+      method: 'get',
+      credentials: 'include'
+    }).then(parseResponse);
   }
 }

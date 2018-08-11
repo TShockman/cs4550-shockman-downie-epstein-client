@@ -21,6 +21,11 @@ export default class Profile extends Component {
 
   getBlogPosts = () => {
     const {user, deleteBlogPost} = this.props;
+
+    if (!user.blogPosts) {
+      return <ListGroupItem><Loading/></ListGroupItem>;
+    }
+
     return user.blogPosts.map(blogPost => (
       <ListGroupItem key={blogPost.id}>
         {blogPost.title}

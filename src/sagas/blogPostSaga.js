@@ -1,7 +1,7 @@
 import {takeEvery, takeLatest, put, fork, all, call, select} from 'redux-saga/effects';
 import {
   CREATE_BLOG_POST_FULFILLED,
-  CREATE_BLOG_POST_REQUESTED,
+  CREATE_BLOG_POST_REQUESTED, CREATE_BP_COMMENT_FULFILLED, CREATE_BP_COMMENT_REQUESTED,
   DELETE_BLOG_POST_FULFILLED,
   DELETE_BLOG_POST_REQUESTED,
   GET_ALL_BLOG_POSTS_FULFILLED,
@@ -97,6 +97,19 @@ function * queryBlogPostSaga({query}) {
   }
 }
 
+function * createCommentSaga({comment, bpid}) {
+  console.log('Creating comment on blog post:', comment, bpid);
+
+  const newComment = yield call(blogPostService.addComment, comment, bpid);
+
+  if (newComment) {
+    yield put({type: CREATE_BP_COMMENT_FULFILLED, comment: newComment});
+    yield put({type: GET_BLOG_POST_REQUESTED, bpid});
+  } else {
+    console.error('Failed to create comment');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_BLOG_POST_REQUESTED, getBlogPostSaga),
@@ -104,6 +117,7 @@ export default function * rootSaga () {
     fork(takeLatest, GET_ALL_BLOG_POSTS_REQUESTED, getAllBlogPostsSaga),
     fork(takeLatest, GET_USER_BLOG_POSTS_REQUESTED, getUserBlogPostsSaga),
     fork(takeLatest, DELETE_BLOG_POST_REQUESTED, deleteBlogPostSaga),
-    fork(takeLatest, QUERY_BLOG_POST_REQUESTED, queryBlogPostSaga)
+    fork(takeLatest, QUERY_BLOG_POST_REQUESTED, queryBlogPostSaga),
+    fork(takeEvery, CREATE_BP_COMMENT_REQUESTED, createCommentSaga)
   ])
 }
