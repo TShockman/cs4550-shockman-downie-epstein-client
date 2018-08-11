@@ -87,6 +87,7 @@ export default class Profile extends Component {
             <h3>User Actions</h3>
             <Button onClick={logout}>Logout</Button>
             <Button color="danger" onClick={deleteAccount}>Delete Account</Button>
+            <Link to="/profile/message" className="btn btn-primary">Messages</Link>
           </Col>
           {user.role === 'DESIGNER' &&
             <Col>

@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../../common/Loading';
 import {Row, Col, ListGroup, ListGroupItem, Input, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-export default class WorkRequest extends PureComponent {
+export default class WorkRequest extends Component {
   static propTypes = {
     user: PropTypes.object,
     getWorkRequest: PropTypes.func.isRequired,

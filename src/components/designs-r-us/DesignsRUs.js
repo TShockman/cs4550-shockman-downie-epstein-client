@@ -16,6 +16,9 @@ import WorkRequests from '../work-request/work-requests/WorkRequestsContainer';
 import NewBlogPost from '../blog-post/new-blog-post/NewBlogPostContainer';
 import BlogPost from '../blog-post/blog-post/BlogPostContainer';
 import BlogPosts from '../blog-post/blog-posts/BlogPostsContainer';
+import Messages from '../message/messages/MessagesContainer';
+import Message from '../message/message/MessageContainer';
+import NewMessage from '../message/new-message/NewMessageContainer';
 
 // import styling
 import 'bootstrap/dist/css/bootstrap.css';
@@ -33,7 +36,7 @@ export default class DesignsRUs extends Component {
                 <Route exact path="/" component={Homepage}/>
                 <Route path="/register" component={Register}/>
                 <Route path="/login" component={Login}/>
-                <Route path="/profile" component={Profile}/>
+                <Route exact path="/profile" component={Profile}/>
                 <Route path="/listing/search" component={Listings}/>
                 <Route exact path="/listing/new" component={NewListing}/>
                 <Route path="/listing/:lid" component={Listing}/>
@@ -43,6 +46,9 @@ export default class DesignsRUs extends Component {
                 <Route path="/blogPost/search" component={BlogPosts}/>
                 <Route exact path="/blogPost/new" component={NewBlogPost}/>
                 <Route path="/blogPost/:bpid" component={BlogPost}/>
+                <Route exact path="/profile/message" component={Messages}/>
+                <Route exact path="/profile/message/new" component={NewMessage}/>
+                <Route path="/profile/message/:mid" component={Message}/>
                 <Redirect to="/"/>
               </Switch>
             </div>
