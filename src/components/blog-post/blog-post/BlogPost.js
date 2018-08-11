@@ -41,6 +41,21 @@ export default class BlogPost extends PureComponent {
     this.setState({comment: ''});
   };
 
+  getCommentItem = c => {
+    const {user, deleteComment, currentBlogPost} = this.props;
+    const deleteButton = user && (user.role === 'ADMIN' || user.id === c.owner.id)
+      ? <Button className="float-right" onClick={() => deleteComment(c.id, currentBlogPost.id)} color="danger">
+          <i className="fa fa-trash"/>
+        </Button>
+      : '';
+
+    return (
+      <ListGroupItem key={c.id}>
+        <strong>{c.owner.username}</strong>: {c.comment} {deleteButton}
+      </ListGroupItem>
+    )
+  }
+
   render() {
     const {match, currentBlogPost, user} = this.props;
 
@@ -67,9 +82,7 @@ export default class BlogPost extends PureComponent {
         <Row>
           <Col>
             <ListGroup>
-              {currentBlogPost.comments.map(c => {
-                return <ListGroupItem key={c.id}><strong>{c.owner.username}:</strong> {c.comment}</ListGroupItem>
-              })}
+              {currentBlogPost.comments.map(this.getCommentItem)}
               {user ?
                 <ListGroupItem>
                   <Input onChange={this.handleChange} type="textarea" placeholder="Wow! Cool!" value={this.state.comment}/>

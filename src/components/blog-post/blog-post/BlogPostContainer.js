@@ -30,9 +30,10 @@ function mapDispatchToProps(dispatch) {
       comment,
       bpid
     }),
-    deleteComment: cid => dispatch({
+    deleteComment: (cid, bpid) => dispatch({
       type: DELETE_BP_COMMENT_REQUESTED,
-      cid
+      cid,
+      bpid
     })
   };
 }

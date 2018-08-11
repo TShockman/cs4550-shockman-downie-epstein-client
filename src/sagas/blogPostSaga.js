@@ -3,7 +3,7 @@ import {
   CREATE_BLOG_POST_FULFILLED,
   CREATE_BLOG_POST_REQUESTED, CREATE_BP_COMMENT_FULFILLED, CREATE_BP_COMMENT_REQUESTED,
   DELETE_BLOG_POST_FULFILLED,
-  DELETE_BLOG_POST_REQUESTED,
+  DELETE_BLOG_POST_REQUESTED, DELETE_BP_COMMENT_FULFILLED, DELETE_BP_COMMENT_REQUESTED,
   GET_ALL_BLOG_POSTS_FULFILLED,
   GET_ALL_BLOG_POSTS_REQUESTED,
   GET_BLOG_POST_FULFILLED,
@@ -15,9 +15,10 @@ import BlogPostService from '../services/BlogPostService';
 import {redirect} from '../actions/navigationActions';
 import {selectUserState} from '../selectors/userSelector';
 import {GET_PROFILE_REQUESTED} from '../actions/userActions';
+import CommentService from '../services/CommentService';
 
 const blogPostService = BlogPostService.instance;
-
+const commentService = CommentService.instance;
 
 function * getBlogPostSaga({bpid}) {
   console.log('Getting blogPost:', bpid);
@@ -110,6 +111,18 @@ function * createCommentSaga({comment, bpid}) {
   }
 }
 
+function * deleteCommentSaga({cid, bpid}) {
+  console.log('Deleting comment from blog post', cid, bpid);
+  const deleted = yield call(commentService.deleteComment, cid);
+
+  if (deleted) {
+    yield put({type: DELETE_BP_COMMENT_FULFILLED, cid, bpid});
+    yield put({type: GET_BLOG_POST_REQUESTED, bpid});
+  } else {
+    console.error('Failed to delete comment');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_BLOG_POST_REQUESTED, getBlogPostSaga),
@@ -118,6 +131,7 @@ export default function * rootSaga () {
     fork(takeLatest, GET_USER_BLOG_POSTS_REQUESTED, getUserBlogPostsSaga),
     fork(takeLatest, DELETE_BLOG_POST_REQUESTED, deleteBlogPostSaga),
     fork(takeLatest, QUERY_BLOG_POST_REQUESTED, queryBlogPostSaga),
-    fork(takeEvery, CREATE_BP_COMMENT_REQUESTED, createCommentSaga)
+    fork(takeEvery, CREATE_BP_COMMENT_REQUESTED, createCommentSaga),
+    fork(takeEvery, DELETE_BP_COMMENT_REQUESTED, deleteCommentSaga)
   ])
 }
