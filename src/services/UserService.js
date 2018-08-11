@@ -1,4 +1,4 @@
-import {LOGIN_URL, LOGOUT_URL, parseResponse, PROFILE_BP_URL, PROFILE_L_URL, PROFILE_URL, USER_URL} from './api';
+import {LOGIN_URL, LOGOUT_URL, parseResponse, PROFILE_BP_URL, PROFILE_WR_URL, PROFILE_L_URL, PROFILE_URL, USER_URL} from './api';
 
 const _singleton = Symbol();
 
@@ -71,6 +71,13 @@ export default class UserService {
 
   getProfileListings() {
     return fetch(PROFILE_L_URL, {
+      method: 'get',
+      credentials: 'include'
+    }).then(parseResponse);
+  }
+
+  getProfileWorkRequests() {
+    return fetch(PROFILE_WR_URL, {
       method: 'get',
       credentials: 'include'
     }).then(parseResponse);

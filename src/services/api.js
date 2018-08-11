@@ -6,6 +6,7 @@ export const LOGOUT_URL = `${API_URL}/logout`;
 export const PROFILE_URL = `${API_URL}/profile`;
 export const PROFILE_BP_URL = `${PROFILE_URL}/blogPost`;
 export const PROFILE_L_URL = `${PROFILE_URL}/listing`;
+export const PROFILE_WR_URL = `${PROFILE_URL}/workRequest`;
 export const LISTING_URL = `${API_URL}/listing`;
 export const LISTING_QUERY_URL = `${LISTING_URL}/search`;
 export const WORK_REQUEST_URL = `${API_URL}/workRequest`;

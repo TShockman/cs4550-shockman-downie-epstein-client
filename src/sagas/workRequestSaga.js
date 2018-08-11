@@ -9,15 +9,19 @@ import {
   GET_WORK_REQUEST_FULFILLED,
   GET_WORK_REQUEST_REQUESTED,
   GET_USER_WORK_REQUESTS_FULFILLED,
-  GET_USER_WORK_REQUESTS_REQUESTED, QUERY_WORK_REQUEST_FULFILLED, QUERY_WORK_REQUEST_REQUESTED
+  GET_USER_WORK_REQUESTS_REQUESTED,
+  QUERY_WORK_REQUEST_FULFILLED,
+  QUERY_WORK_REQUEST_REQUESTED,
+  CREATE_WR_COMMENT_FULFILLED, DELETE_WR_COMMENT_FULFILLED, DELETE_WR_COMMENT_REQUESTED, CREATE_WR_COMMENT_REQUESTED
 } from '../actions/workRequestActions';
 import WorkRequestService from '../services/WorkRequestService';
 import {redirect} from '../actions/navigationActions';
 import {selectUserState} from '../selectors/userSelector';
 import {GET_PROFILE_REQUESTED} from '../actions/userActions';
+import CommentService from '../services/CommentService';
 
 const workRequestService = WorkRequestService.instance;
-
+const commentService = CommentService.instance;
 
 function * getWorkRequestSaga({wrid}) {
   console.log('Getting workRequest:', wrid);
@@ -97,6 +101,31 @@ function * queryWorkRequestSaga({query}) {
   }
 }
 
+function * createCommentSaga({comment, wrid}) {
+  console.log('Creating comment on work request:', comment, wrid);
+
+  const newComment = yield call(workRequestService.addComment, comment, wrid);
+
+  if (newComment) {
+    yield put({type: CREATE_WR_COMMENT_FULFILLED, comment: newComment});
+    yield put({type: GET_WORK_REQUEST_REQUESTED, wrid});
+  } else {
+    console.error('Failed to create comment');
+  }
+}
+
+function * deleteCommentSaga({cid, wrid}) {
+  console.log('Deleting comment from work request', cid, wrid);
+  const deleted = yield call(commentService.deleteComment, cid);
+
+  if (deleted) {
+    yield put({type: DELETE_WR_COMMENT_FULFILLED, cid, wrid});
+    yield put({type: GET_WORK_REQUEST_REQUESTED, wrid});
+  } else {
+    console.error('Failed to delete comment');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_WORK_REQUEST_REQUESTED, getWorkRequestSaga),
@@ -104,6 +133,8 @@ export default function * rootSaga () {
     fork(takeLatest, GET_ALL_WORK_REQUESTS_REQUESTED, getAllWorkRequestsSaga),
     fork(takeLatest, GET_USER_WORK_REQUESTS_REQUESTED, getUserWorkRequestsSaga),
     fork(takeLatest, DELETE_WORK_REQUEST_REQUESTED, deleteWorkRequestSaga),
-    fork(takeLatest, QUERY_WORK_REQUEST_REQUESTED, queryWorkRequestSaga)
+    fork(takeLatest, QUERY_WORK_REQUEST_REQUESTED, queryWorkRequestSaga),
+    fork(takeEvery, DELETE_WR_COMMENT_REQUESTED, deleteCommentSaga),
+    fork(takeEvery, CREATE_WR_COMMENT_REQUESTED, createCommentSaga)
   ])
 }

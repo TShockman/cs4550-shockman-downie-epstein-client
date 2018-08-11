@@ -39,6 +39,10 @@ export default class Profile extends Component {
 
   getWorkRequests = () => {
     const {user, deleteWorkRequest} = this.props;
+
+    if (!user.workRequests) {
+      return <ListGroupItem><Loading/></ListGroupItem>;
+    }
     return user.workRequests.map(workRequest => (
       <ListGroupItem key={workRequest.id}>
         {workRequest.title}

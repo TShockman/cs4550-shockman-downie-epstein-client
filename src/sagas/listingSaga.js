@@ -114,7 +114,7 @@ function * createCommentSaga({comment, lid}) {
 }
 
 function * deleteCommentSaga({cid, lid}) {
-  console.log('Deleting comment from blog post', cid, lid);
+  console.log('Deleting comment from listing', cid, lid);
   const deleted = yield call(commentService.deleteComment, cid);
 
   if (deleted) {

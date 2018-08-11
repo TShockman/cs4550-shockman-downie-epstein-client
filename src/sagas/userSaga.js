@@ -48,15 +48,17 @@ function * registerUser({user}) {
 
 function * getProfile() {
   console.log('Getting user profile');
-  const [profile, blogPosts, listings] = yield all([
+  const [profile, blogPosts, listings, workRequests] = yield all([
     call(userService.getProfile),
     call(userService.getProfileBlogPosts),
-    call(userService.getProfileListings)
+    call(userService.getProfileListings),
+    call(userService.getProfileWorkRequests)
   ]);
 
   if (profile) {
     profile.blogPosts = blogPosts || [];
     profile.listings = listings || [];
+    profile.workRequests = workRequests || [];
     console.log('Successfully retrieved user:', JSON.stringify(profile, null, 2));
     yield put({type: GET_PROFILE_FULFILLED, user: profile});
   } else {

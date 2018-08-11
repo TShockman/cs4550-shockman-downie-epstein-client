@@ -1,4 +1,4 @@
-import {parseResponse, USER_URL, WORK_REQUEST_QUERY_URL, WORK_REQUEST_URL} from './api';
+import {BLOG_POST_URL, parseResponse, USER_URL, WORK_REQUEST_QUERY_URL, WORK_REQUEST_URL} from './api';
 
 const _singleton = Symbol();
 
@@ -60,4 +60,14 @@ export default class WorkRequestService {
     }).then(parseResponse);
   }
 
+  addComment(comment, wrid) {
+    return fetch(`${WORK_REQUEST_URL}/${wrid}/comment`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(comment)
+    }).then(parseResponse);
+  }
 }
