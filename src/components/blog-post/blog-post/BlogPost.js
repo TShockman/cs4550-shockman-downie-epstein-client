@@ -54,7 +54,7 @@ export default class BlogPost extends PureComponent {
         <strong>{c.owner.username}</strong>: {c.comment} {deleteButton}
       </ListGroupItem>
     )
-  }
+  };
 
   render() {
     const {match, currentBlogPost, user} = this.props;

@@ -52,6 +52,11 @@ export default class Profile extends Component {
 
   getListings = () => {
     const {user, deleteListing} = this.props;
+
+    if (!user.listings) {
+      return <ListGroupItem><Loading/></ListGroupItem>;
+    }
+
     return user.listings.map(listing => (
       <ListGroupItem key={listing.id}>
         {listing.title}

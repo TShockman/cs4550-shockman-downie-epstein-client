@@ -48,14 +48,16 @@ function * registerUser({user}) {
 
 function * getProfile() {
   console.log('Getting user profile');
-  const [profile, blogPosts] = yield all([
+  const [profile, blogPosts, listings] = yield all([
     call(userService.getProfile),
-    call(userService.getProfileBlogPosts)
+    call(userService.getProfileBlogPosts),
+    call(userService.getProfileListings)
   ]);
 
   if (profile) {
-    console.log('Successfully retrieved user:', JSON.stringify(profile, null, 2));
     profile.blogPosts = blogPosts || [];
+    profile.listings = listings || [];
+    console.log('Successfully retrieved user:', JSON.stringify(profile, null, 2));
     yield put({type: GET_PROFILE_FULFILLED, user: profile});
   } else {
     // if no profile, redirect to login after clearing user

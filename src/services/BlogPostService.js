@@ -67,6 +67,6 @@ export default class BlogPostService {
       },
       credentials: 'include',
       body: JSON.stringify(comment)
-    }).then(parseResponse)
+    }).then(parseResponse);
   }
 }
