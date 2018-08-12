@@ -11,12 +11,9 @@ import {GET_ALL_BLOG_POSTS_REQUESTED} from '../../actions/blogPostActions';
 
 
 function mapStateToProps(state) {
-  const listingState = selectListingState(state);
-  const listings = Object.keys(listingState.listings).map(key => listingState.listings[key]);
-  const workRequestState = selectWorkRequestState(state);
-  const workRequests = Object.keys(workRequestState.workRequests).map(key => workRequestState.workRequests[key]);
-  const blogPostState = selectBlogPostState(state);
-  const blogPosts = Object.keys(blogPostState.blogPosts).map(key => blogPostState.blogPosts[key]);
+  const {listings} = selectListingState(state);
+  const {workRequests} = selectWorkRequestState(state);
+  const {blogPosts} = selectBlogPostState(state);
   return {
     listings,
     workRequests,

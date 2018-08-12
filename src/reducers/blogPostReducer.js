@@ -6,6 +6,7 @@ import {
   GET_BLOG_POST_FULFILLED, GET_BLOG_POST_REQUESTED,
   GET_USER_BLOG_POSTS_FULFILLED, GET_USER_BLOG_POSTS_REQUESTED, QUERY_BLOG_POST_FULFILLED
 } from '../actions/blogPostActions';
+import {createdSort} from '../utils';
 
 const BlogPostState = Record({
   blogPosts: [], // list of blogPosts
@@ -33,7 +34,9 @@ export default (state = initialState, action) => {
       return state.set('currentBlogPost', action.blogPost);
     }
     case GET_ALL_BLOG_POSTS_FULFILLED: {
-      return state.set('blogPosts', action.blogPosts);
+      const blogPosts = action.blogPosts;
+      blogPosts.sort(createdSort);
+      return state.set('blogPosts', blogPosts);
     }
     case GET_USER_BLOG_POSTS_FULFILLED: {
       return state.set('currentBlogPosts', action.blogPosts);

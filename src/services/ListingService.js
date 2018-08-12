@@ -1,4 +1,5 @@
-import {BLOG_POST_URL, LISTING_QUERY_URL, LISTING_URL, parseResponse, USER_URL} from './api';
+import {BLOG_POST_URL, LISTING_QUERY_URL, LISTING_URL, USER_URL} from './api';
+import {parseResponse} from '../utils';
 
 const _singleton = Symbol();
 

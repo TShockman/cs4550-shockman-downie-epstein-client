@@ -1,4 +1,5 @@
-import {LOGIN_URL, LOGOUT_URL, parseResponse, PROFILE_BP_URL, PROFILE_WR_URL, PROFILE_L_URL, PROFILE_URL, USER_URL} from './api';
+import {LOGIN_URL, LOGOUT_URL, PROFILE_BP_URL, PROFILE_WR_URL, PROFILE_L_URL, PROFILE_URL, USER_URL} from './api';
+import {parseResponse} from '../utils';
 
 const _singleton = Symbol();
 

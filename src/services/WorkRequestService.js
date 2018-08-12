@@ -1,4 +1,5 @@
-import {BLOG_POST_URL, parseResponse, USER_URL, WORK_REQUEST_QUERY_URL, WORK_REQUEST_URL} from './api';
+import {BLOG_POST_URL, USER_URL, WORK_REQUEST_QUERY_URL, WORK_REQUEST_URL} from './api';
+import {parseResponse} from '../utils';
 
 const _singleton = Symbol();
 

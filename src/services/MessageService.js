@@ -1,4 +1,5 @@
-import {PROFILE_MESSAGE_URL, parseResponse, USER_URL, MESSAGE_URL} from './api';
+import {PROFILE_MESSAGE_URL, USER_URL, MESSAGE_URL} from './api';
+import {parseResponse} from '../utils';
 
 const _singleton = Symbol();
 

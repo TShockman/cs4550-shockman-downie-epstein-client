@@ -5,6 +5,7 @@ import {
   GET_WORK_REQUEST_FULFILLED, GET_WORK_REQUEST_REQUESTED,
   GET_USER_WORK_REQUESTS_FULFILLED, GET_USER_WORK_REQUESTS_REQUESTED, QUERY_WORK_REQUEST_FULFILLED
 } from '../actions/workRequestActions';
+import {createdSort} from '../utils';
 
 const WorkRequestState = Record({
   workRequests: [], // list of workRequests
@@ -32,7 +33,9 @@ export default (state = initialState, action) => {
       return state.set('currentWorkRequest', action.workRequest);
     }
     case GET_ALL_WORK_REQUESTS_FULFILLED: {
-      return state.set('workRequests', action.workRequests);
+      const workRequests = action.workRequests;
+      workRequests.sort(createdSort);
+      return state.set('workRequests', workRequests);
     }
     case GET_USER_WORK_REQUESTS_FULFILLED: {
       return state.set('currentWorkRequests', action.workRequests);

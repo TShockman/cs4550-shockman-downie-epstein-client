@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {formatDate} from '../../utils';
 
 export default class Homepage extends Component {
   static propTypes = {
@@ -24,12 +25,18 @@ export default class Homepage extends Component {
 
     return (
       <ListGroup>
-        {blogPosts.map(blogPost => (
+        {blogPosts.slice(0,5).map(blogPost => (
           <ListGroupItem key={blogPost.id}>
-            {blogPost.title}
-            <Link to={`/blogPost/${blogPost.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
+            <strong>{blogPost.title}</strong>
+            <span className="float-right">
+              <span className="mr-2">{formatDate(blogPost.created)}</span>
+              <Link to={`/blogPost/${blogPost.id}`}><i className="fa fa-arrow-right"/></Link>
+            </span>
           </ListGroupItem>
         ))}
+        <ListGroupItem>
+          <Link to="/blogPost">All Blog Posts</Link>
+        </ListGroupItem>
         <ListGroupItem>
           <Link to="/blogPost/search">Search Blog Posts</Link>
         </ListGroupItem>
@@ -42,12 +49,18 @@ export default class Homepage extends Component {
 
     return (
       <ListGroup>
-        {listings.map(listing => (
+        {listings.slice(0,5).map(listing => (
           <ListGroupItem key={listing.id}>
-            {listing.title}
-            <Link to={`/listing/${listing.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
+            <strong>{listing.title}</strong>
+            <span className="float-right">
+              <span className="mr-2">{formatDate(listing.created)}</span>
+              <Link to={`/listing/${listing.id}`}><i className="fa fa-arrow-right"/></Link>
+            </span>
           </ListGroupItem>
           ))}
+          <ListGroupItem>
+            <Link to="/listing">All Listings</Link>
+          </ListGroupItem>
           <ListGroupItem>
             <Link to="/listing/search">Search Listings</Link>
           </ListGroupItem>
@@ -60,12 +73,18 @@ export default class Homepage extends Component {
 
     return (
       <ListGroup>
-        {workRequests.map(workRequest => (
+        {workRequests.slice(0,5).map(workRequest => (
           <ListGroupItem key={workRequest.id}>
-            {workRequest.title}
-            <Link to={`/workRequest/${workRequest.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
+            <strong>{workRequest.title}</strong>
+            <span className="float-right">
+              <span className="mr-2">{formatDate(workRequest.created)}</span>
+              <Link to={`/workRequest/${workRequest.id}`}><i className="fa fa-arrow-right"/></Link>
+            </span>
           </ListGroupItem>
         ))}
+        <ListGroupItem>
+          <Link to="/workRequest">All Work Requests</Link>
+        </ListGroupItem>
         <ListGroupItem>
           <Link to="/workRequest/search">Search Work Requests</Link>
         </ListGroupItem>

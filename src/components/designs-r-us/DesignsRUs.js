@@ -19,6 +19,9 @@ import BlogPosts from '../blog-post/search-blog-posts/SearchBlogPostsContainer';
 import Messages from '../message/messages/MessagesContainer';
 import Message from '../message/message/MessageContainer';
 import NewMessage from '../message/new-message/NewMessageContainer';
+import ListWorkRequests from '../work-request/list-work-requests/ListWorkRequestsContainer';
+import ListListings from '../listing/list-listings/ListListingsContainer';
+import ListBlogPosts from '../blog-post/list-blog-posts/ListBlogPostsContainer';
 
 // import styling
 import 'bootstrap/dist/css/bootstrap.css';
@@ -34,18 +37,26 @@ export default class DesignsRUs extends Component {
               <DesignsRUsNav/>
               <Switch>
                 <Route exact path="/" component={Homepage}/>
+
                 <Route path="/register" component={Register}/>
                 <Route path="/login" component={Login}/>
                 <Route exact path="/profile" component={Profile}/>
+
+                <Route exact path="/listing" component={ListListings}/>
                 <Route path="/listing/search" component={Listings}/>
                 <Route exact path="/listing/new" component={NewListing}/>
                 <Route path="/listing/:lid" component={Listing}/>
+
+                <Route exact path="/workRequest" component={ListWorkRequests}/>
                 <Route path="/workRequest/search" component={WorkRequests}/>
                 <Route exact path="/workRequest/new" component={NewWorkRequest}/>
                 <Route path="/workRequest/:wrid" component={WorkRequest}/>
+
+                <Route exact path="/blogPost" component={ListBlogPosts}/>
                 <Route path="/blogPost/search" component={BlogPosts}/>
                 <Route exact path="/blogPost/new" component={NewBlogPost}/>
                 <Route path="/blogPost/:bpid" component={BlogPost}/>
+
                 <Route exact path="/profile/message" component={Messages}/>
                 <Route exact path="/profile/message/new" component={NewMessage}/>
                 <Route path="/profile/message/:mid" component={Message}/>
