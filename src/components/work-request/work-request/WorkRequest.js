@@ -67,6 +67,19 @@ export default class WorkRequest extends Component {
     draftMessage(to, message);
   };
 
+  getImages = () => {
+    const {currentWorkRequest} = this.props;
+    const srcs = currentWorkRequest.imageSrcs ? currentWorkRequest.imageSrcs.split('\n') : [];
+    if (srcs.length === 0) {
+      return null;
+    }
+    return (
+      <ListGroup>
+        {srcs.map((src, k) => <ListGroupItem key={k}><img src={src}/></ListGroupItem>)}
+      </ListGroup>
+    )
+  };
+
   render() {
     const {match, currentWorkRequest, user} = this.props;
 
@@ -82,6 +95,9 @@ export default class WorkRequest extends Component {
             <p>{currentWorkRequest.title}</p>
             <h3>Description</h3>
             <p>{currentWorkRequest.description}</p>
+            <h3>Compensation</h3>
+            <p>{currentWorkRequest.compensation}</p>
+            {this.getImages()}
             <h3>Created</h3>
             <p>{currentWorkRequest.created}</p>
             <h3>Modified</h3>

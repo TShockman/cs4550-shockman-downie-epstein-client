@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
 export default class NewWorkRequest extends Component {
@@ -13,7 +13,9 @@ export default class NewWorkRequest extends Component {
     super();
     this.state = {
       title: '',
-      description: ''
+      description: '',
+      compensation: '',
+      imageSrcs: ''
     };
   }
 
@@ -25,11 +27,13 @@ export default class NewWorkRequest extends Component {
   handleSubmit = event => {
     event.stopPropagation();
     const {createWorkRequest} = this.props;
-    const {title, description} = this.state;
+    const {title, description, compensation, imageSrcs} = this.state;
 
     createWorkRequest({
       title,
-      description
+      description,
+      compensation,
+      imageSrcs
     });
   };
 
@@ -48,6 +52,15 @@ export default class NewWorkRequest extends Component {
         <FormGroup>
           <Label for="description">Description</Label>
           <Input onChange={this.handleFormUpdate} id="description" name="description" type="textarea" placeholder="I am looking for someone to paint the nails of my beloved German Shephard named Tootsie weekly."/>
+        </FormGroup>
+        <FormGroup>
+          <Label for="compensation">Compensation</Label>
+          <Input onChange={this.handleFormUpdate} id="compensation" name="compensation" placeholder="$100/hour"/>
+        </FormGroup>
+        <FormGroup>
+          <Label for="imageSrcs">Image Sources</Label>
+          <Input onChange={this.handleFormUpdate} id="imageSrcs" name="imageSrcs" type="textarea"/>
+          <FormText>One image source URL per line.</FormText>
         </FormGroup>
         <Button onClick={this.handleSubmit}>Create Work Request</Button>
       </Form>
