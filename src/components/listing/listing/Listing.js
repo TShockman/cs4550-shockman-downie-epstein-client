@@ -67,6 +67,19 @@ export default class Listing extends Component {
     draftMessage(to, message);
   };
 
+  getImages = () => {
+    const {currentListing} = this.props;
+    const srcs = currentListing.imageSrcs ? currentListing.imageSrcs.split('\n') : [];
+    if (srcs.length === 0) {
+      return null;
+    }
+    return (
+      <ListGroup>
+        {srcs.map((src, k) => <ListGroupItem key={k}><img src={src}/></ListGroupItem>)}
+      </ListGroup>
+    )
+  };
+
   render() {
     const {match, currentListing, user} = this.props;
 
@@ -82,6 +95,9 @@ export default class Listing extends Component {
             <p>{currentListing.title}</p>
             <h3>Description</h3>
             <p>{currentListing.description}</p>
+            <h3>Rate</h3>
+            <p>{currentListing.rate}</p>
+            {this.getImages()}
             <h3>Created</h3>
             <p>{currentListing.created}</p>
             <h3>Modified</h3>
