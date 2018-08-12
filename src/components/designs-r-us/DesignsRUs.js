@@ -9,13 +9,13 @@ import Login from '../login/LoginContainer'
 import Profile from '../profile/ProfileContainer';
 import NewListing from '../listing/new-listing/NewListingContainer';
 import Listing from '../listing/listing/ListingContainer';
-import Listings from '../listing/listings/ListingsContainer';
+import Listings from '../listing/search-listings/SearchListingsContainer';
 import NewWorkRequest from '../work-request/new-work-request/NewWorkRequestContainer';
 import WorkRequest from '../work-request/work-request/WorkRequestContainer';
-import WorkRequests from '../work-request/work-requests/WorkRequestsContainer';
+import WorkRequests from '../work-request/search-work-requests/SearchWorkRequestsContainer';
 import NewBlogPost from '../blog-post/new-blog-post/NewBlogPostContainer';
 import BlogPost from '../blog-post/blog-post/BlogPostContainer';
-import BlogPosts from '../blog-post/blog-posts/BlogPostsContainer';
+import BlogPosts from '../blog-post/search-blog-posts/SearchBlogPostsContainer';
 import Messages from '../message/messages/MessagesContainer';
 import Message from '../message/message/MessageContainer';
 import NewMessage from '../message/new-message/NewMessageContainer';

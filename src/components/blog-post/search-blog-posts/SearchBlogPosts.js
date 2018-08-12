@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Input, Button, Form, FormGroup, Label, Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-export default class BlogPosts extends Component {
+export default class SearchBlogPosts extends Component {
   static propTypes = {
     blogPosts: PropTypes.array,
     searchBlogPosts: PropTypes.func

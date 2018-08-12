@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import {selectListingState} from '../../../selectors/listingSelector';
 import {QUERY_LISTING_REQUESTED} from '../../../actions/listingActions';
-import Listings from './Listings';
+import SearchListings from './SearchListings';
 
 
 function mapStateToProps(state) {
@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Listings);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchListings);

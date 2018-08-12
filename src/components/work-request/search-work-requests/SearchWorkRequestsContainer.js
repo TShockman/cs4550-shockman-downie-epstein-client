@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import WorkRequests from './WorkRequests';
+import SearchWorkRequests from './SearchWorkRequests';
 import {QUERY_WORK_REQUEST_REQUESTED} from '../../../actions/workRequestActions';
 import {selectWorkRequestState} from '../../../selectors/workRequestSelector';
 
@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkRequests);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchWorkRequests);

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Input, Button, Form, FormGroup, Label, Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-export default class Listings extends Component {
+export default class SearchListings extends Component {
   static propTypes = {
     listings: PropTypes.array,
     searchListings: PropTypes.func

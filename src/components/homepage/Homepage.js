@@ -30,6 +30,9 @@ export default class Homepage extends Component {
             <Link to={`/blogPost/${blogPost.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
           </ListGroupItem>
         ))}
+        <ListGroupItem>
+          <Link to="/blogPost/search">Search Blog Posts</Link>
+        </ListGroupItem>
       </ListGroup>
     );
   }
@@ -45,6 +48,9 @@ export default class Homepage extends Component {
             <Link to={`/listing/${listing.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
           </ListGroupItem>
           ))}
+          <ListGroupItem>
+            <Link to="/listing/search">Search Listings</Link>
+          </ListGroupItem>
       </ListGroup>
     );
   }
@@ -60,6 +66,9 @@ export default class Homepage extends Component {
             <Link to={`/workRequest/${workRequest.id}`} className="float-right"><i className="fa fa-arrow-right"/></Link>
           </ListGroupItem>
         ))}
+        <ListGroupItem>
+          <Link to="/workRequest/search">Search Work Requests</Link>
+        </ListGroupItem>
       </ListGroup>
     );
   }
@@ -78,7 +87,7 @@ export default class Homepage extends Component {
           </Col>
           <Col>
             <h2>Blog Posts</h2>
-            {this.getBlogPosts()};
+            {this.getBlogPosts()}
           </Col>
         </Row>
       </div>

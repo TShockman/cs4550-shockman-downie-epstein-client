@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import BlogPosts from './BlogPosts';
+import SearchBlogPosts from './SearchBlogPosts';
 import {selectBlogPostState} from '../../../selectors/blogPostSelector';
 import {QUERY_BLOG_POST_REQUESTED} from '../../../actions/blogPostActions';
 
@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogPosts);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBlogPosts);
