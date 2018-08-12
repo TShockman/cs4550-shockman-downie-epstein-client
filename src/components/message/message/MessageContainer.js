@@ -1,11 +1,11 @@
 import {connect} from 'react-redux'
 import Message from './Message';
-import {DRAFT_MESSAGE, GET_MESSAGE_REQUESTED} from '../../../actions/messageActions';
+import {DELETE_MESSAGE_REQUESTED, DRAFT_MESSAGE, GET_MESSAGE_REQUESTED} from '../../../actions/messageActions';
 import {selectMessageState} from '../../../selectors/messageSelector';
 
 
 function mapStateToProps(state) {
-  const {message} = selectMessageState(state)
+  const {message} = selectMessageState(state);
   return {
     message
   };
@@ -20,6 +20,10 @@ function mapDispatchToProps(dispatch) {
     }),
     getMessage: mid => dispatch({
       type: GET_MESSAGE_REQUESTED,
+      mid
+    }),
+    deleteMessage: mid => dispatch({
+      type: DELETE_MESSAGE_REQUESTED,
       mid
     })
   }

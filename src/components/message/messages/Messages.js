@@ -8,7 +8,8 @@ export default class Messages extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     draftMessage: PropTypes.func.isRequired,
-    getProfile: PropTypes.func.isRequired
+    getProfile: PropTypes.func.isRequired,
+    deleteMessage: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
@@ -16,7 +17,7 @@ export default class Messages extends Component {
   };
 
   getInbox() {
-    const {user} = this.props;
+    const {user, deleteMessage} = this.props;
 
     const nonDeletedMessages = user.receivedMessages.filter(message => !message.recipientDeleted);
     if (!nonDeletedMessages.length) {
@@ -29,7 +30,7 @@ export default class Messages extends Component {
         {message.subject}
         <span className="float-right">
           <Link to={`/profile/message/${message.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
-          <Button color="danger"><i className="fa fa-trash"/></Button>
+          <Button color="danger" onClick={() => deleteMessage(message.id)}><i className="fa fa-trash"/></Button>
         </span>
       </ListGroupItem>
       );
@@ -37,7 +38,7 @@ export default class Messages extends Component {
   }
 
   getOutbox() {
-    const {user} = this.props;
+    const {user, deleteMessage} = this.props;
 
     const nonDeletedMessages = user.sentMessages.filter(message => !message.senderDeleted);
     if (!nonDeletedMessages.length) {
@@ -50,7 +51,7 @@ export default class Messages extends Component {
           {message.subject}
           <span className="float-right">
           <Link to={`/profile/message/${message.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
-          <Button color="danger"><i className="fa fa-trash"/></Button>
+          <Button color="danger" onClick={() => deleteMessage(message.id)}><i className="fa fa-trash"/></Button>
         </span>
         </ListGroupItem>
       );

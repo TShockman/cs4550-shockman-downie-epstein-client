@@ -1,7 +1,7 @@
 import {Record} from 'immutable';
 import {DELETE_PROFILE, GET_PROFILE_FULFILLED, LOGIN_USER_FULFILLED, LOGOUT} from '../actions/userActions';
 import {DELETE_LISTING_FULFILLED} from '../actions/listingActions';
-import {CLEAR_DRAFT, DRAFT_MESSAGE, GET_MESSAGE_FULFILLED} from '../actions/messageActions';
+import {CLEAR_DRAFT, DELETE_MESSAGE_FULFILLED, DRAFT_MESSAGE, GET_MESSAGE_FULFILLED} from '../actions/messageActions';
 
 const MessageState = Record({
   messageDraft: {
@@ -26,6 +26,12 @@ export default (state = initialState, action) => {
     }
     case GET_MESSAGE_FULFILLED: {
       return state.set('message', action.message);
+    }
+    case DELETE_MESSAGE_FULFILLED: {
+      if (state.message.id === action.mid) {
+        return state.set('message', null);
+      }
+      return state;
     }
     default: {
       return state;

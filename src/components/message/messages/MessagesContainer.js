@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import Messages from './Messages';
 import {selectUserState} from '../../../selectors/userSelector';
-import {DRAFT_MESSAGE} from '../../../actions/messageActions';
+import {DELETE_MESSAGE_REQUESTED, DRAFT_MESSAGE} from '../../../actions/messageActions';
 import {GET_PROFILE_REQUESTED} from '../../../actions/userActions';
 
 
@@ -24,6 +24,10 @@ function mapDispatchToProps(dispatch) {
     }),
     getProfile: () => dispatch({
       type: GET_PROFILE_REQUESTED
+    }),
+    deleteMessage: mid => dispatch({
+      type: DELETE_MESSAGE_REQUESTED,
+      mid
     })
   }
 }

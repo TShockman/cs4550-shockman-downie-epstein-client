@@ -9,7 +9,8 @@ export default class Message extends Component {
     message: PropTypes.object,
     getMessage: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired, //router
-    draftMessage: PropTypes.func.isRequired
+    draftMessage: PropTypes.func.isRequired,
+    deleteMessage: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
@@ -22,6 +23,11 @@ export default class Message extends Component {
     if (match.params['mid'] !== oldProps.match.params['mid']) {
       this.props.getMessage(match.params['mid']);
     }
+  };
+
+  handleDelete = () => {
+    const {deleteMessage, message} = this.props;
+    deleteMessage(message.id);
   };
 
   handleReply = () => {
@@ -55,6 +61,7 @@ export default class Message extends Component {
           </p>
           <Link to="/profile/message" className="btn btn-secondary">Messages</Link>
           <Button color="primary" onClick={this.handleReply}>Reply</Button>
+          <Button color="danger" onClick={this.handleDelete}>Delete</Button>
         </Col>
       </Row>
     );

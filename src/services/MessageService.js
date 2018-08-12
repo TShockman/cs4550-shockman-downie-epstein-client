@@ -32,4 +32,12 @@ export default class MessageService {
       .then(parseResponse);
   }
 
+  deleteMessage(mid) {
+    return fetch(`${MESSAGE_URL}/${mid}`, {
+      method: 'delete',
+      credentials: 'include'
+    })
+      .then(response => response.ok);
+  }
+
 }
