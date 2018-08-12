@@ -67,6 +67,19 @@ export default class BlogPost extends Component {
     draftMessage(to, message);
   };
 
+  getImages = () => {
+    const {currentBlogPost} = this.props;
+    const srcs = currentBlogPost.imageSrcs ? currentBlogPost.imageSrcs.split('\n') : [];
+    if (srcs.length === 0) {
+      return null;
+    }
+    return (
+      <ListGroup>
+        {srcs.map((src, k) => <ListGroupItem key={k}><img src={src}/></ListGroupItem>)}
+      </ListGroup>
+    )
+  };
+
   render() {
     const {match, currentBlogPost, user} = this.props;
 
@@ -82,6 +95,7 @@ export default class BlogPost extends Component {
             <p>{currentBlogPost.title}</p>
             <h3>Description</h3>
             <p>{currentBlogPost.description}</p>
+            {this.getImages()}
             <h3>Created</h3>
             <p>{currentBlogPost.created}</p>
             <h3>Modified</h3>

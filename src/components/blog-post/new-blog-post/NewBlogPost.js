@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, Form, FormText, FormGroup, Label, Input} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
 export default class NewBlogPost extends Component {
@@ -13,7 +13,8 @@ export default class NewBlogPost extends Component {
     super();
     this.state = {
       title: '',
-      description: ''
+      description: '',
+      imageSrcs: ''
     };
   }
 
@@ -25,11 +26,12 @@ export default class NewBlogPost extends Component {
   handleSubmit = event => {
     event.stopPropagation();
     const {createBlogPost} = this.props;
-    const {title, description} = this.state;
+    const {title, description, imageSrcs} = this.state;
 
     createBlogPost({
       title,
-      description
+      description,
+      imageSrcs
     });
   };
 
@@ -48,6 +50,11 @@ export default class NewBlogPost extends Component {
         <FormGroup>
           <Label for="description">Description</Label>
           <Input onChange={this.handleFormUpdate} id="description" name="description" type="textarea" placeholder="Today we are launching a new feature!"/>
+        </FormGroup>
+        <FormGroup>
+          <Label for="imageSrcs">Image Sources</Label>
+          <Input onChange={this.handleFormUpdate} id="imageSrcs" name="imageSrcs" type="textarea"/>
+          <FormText>One image source URL per line.</FormText>
         </FormGroup>
         <Button onClick={this.handleSubmit}>Create Blog Post</Button>
       </Form>
