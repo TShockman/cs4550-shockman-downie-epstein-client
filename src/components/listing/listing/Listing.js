@@ -13,7 +13,8 @@ export default class Listing extends Component {
     match: PropTypes.object.isRequired, //router,
     history: PropTypes.object.isRequired, //router
     createComment: PropTypes.func.isRequired,
-    deleteComment: PropTypes.func.isRequired
+    deleteComment: PropTypes.func.isRequired,
+    draftMessage: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -56,6 +57,16 @@ export default class Listing extends Component {
     )
   };
 
+  handleMessage = () => {
+    const {draftMessage, currentListing} = this.props;
+    const to = currentListing.owner.username;
+    const message = {
+      subject: currentListing.title,
+      body: ''
+    };
+    draftMessage(to, message);
+  };
+
   render() {
     const {match, currentListing, user} = this.props;
 
@@ -76,7 +87,8 @@ export default class Listing extends Component {
             <h3>Modified</h3>
             <p>{currentListing.modified}</p>
             <h3>Owner</h3>
-            <p>{currentListing.owner}</p>
+            <p>{currentListing.owner.username}</p>
+            <Button onClick={this.handleMessage}>Message Owner About This Listing</Button>
           </Col>
         </Row>
         <Row>

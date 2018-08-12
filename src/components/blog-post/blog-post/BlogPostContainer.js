@@ -7,6 +7,7 @@ import {
 } from '../../../actions/blogPostActions';
 import {selectBlogPostState} from '../../../selectors/blogPostSelector';
 import {selectUserState} from '../../../selectors/userSelector';
+import {DRAFT_MESSAGE} from '../../../actions/messageActions';
 
 
 function mapStateToProps(state) {
@@ -34,6 +35,11 @@ function mapDispatchToProps(dispatch) {
       type: DELETE_BP_COMMENT_REQUESTED,
       cid,
       bpid
+    }),
+    draftMessage: (to, message) => dispatch({
+      type: DRAFT_MESSAGE,
+      to,
+      message
     })
   };
 }

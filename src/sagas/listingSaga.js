@@ -17,20 +17,25 @@ import {redirect} from '../actions/navigationActions';
 import {selectUserState} from '../selectors/userSelector';
 import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 import CommentService from '../services/CommentService';
+import UserService from '../services/UserService';
 
 
 const listingService = ListingService.instance;
 const commentService = CommentService.instance;
+const userService = UserService.instance;
 
 function * getListingSaga({lid}) {
   console.log('Getting listing:', lid);
   const listing = yield call(listingService.getListing, lid);
 
   if (listing) {
-    yield put({type: GET_LISTING_FULFILLED, listing});
-  } else {
-    console.error('Failed to retrieve listing');
+    const owner = yield call(userService.getUser, listing.ownerId);
+    if (owner) {
+      listing.owner = owner;
+      return yield put({type: GET_LISTING_FULFILLED, listing});
+    }
   }
+  console.error('Failed to retrieve listing');
 }
 
 function * createListingSaga({listing}) {

@@ -13,7 +13,8 @@ export default class WorkRequest extends Component {
     match: PropTypes.object.isRequired, //router,
     history: PropTypes.object.isRequired, //router
     createComment: PropTypes.func.isRequired,
-    deleteComment: PropTypes.func.isRequired
+    deleteComment: PropTypes.func.isRequired,
+    draftMessage: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -56,6 +57,16 @@ export default class WorkRequest extends Component {
     )
   };
 
+  handleMessage = () => {
+    const {draftMessage, currentWorkRequest} = this.props;
+    const to = currentWorkRequest.owner.username;
+    const message = {
+      subject: currentWorkRequest.title,
+      body: ''
+    };
+    draftMessage(to, message);
+  };
+
   render() {
     const {match, currentWorkRequest, user} = this.props;
 
@@ -76,7 +87,8 @@ export default class WorkRequest extends Component {
             <h3>Modified</h3>
             <p>{currentWorkRequest.modified}</p>
             <h3>Owner</h3>
-            <p>{currentWorkRequest.owner}</p>
+            <p>{currentWorkRequest.owner.username}</p>
+            <Button onClick={this.handleMessage}>Message Owner About This Work Request</Button>
           </Col>
         </Row>
         <Row>

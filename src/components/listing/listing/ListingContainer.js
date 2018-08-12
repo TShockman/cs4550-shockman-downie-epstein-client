@@ -7,6 +7,7 @@ import {
   GET_LISTING_REQUESTED
 } from '../../../actions/listingActions';
 import {selectUserState} from '../../../selectors/userSelector';
+import {DRAFT_MESSAGE} from '../../../actions/messageActions';
 
 
 function mapStateToProps(state) {
@@ -34,6 +35,11 @@ function mapDispatchToProps(dispatch) {
       type: DELETE_L_COMMENT_REQUESTED,
       cid,
       lid
+    }),
+    draftMessage: (to, message) => dispatch({
+      type: DRAFT_MESSAGE,
+      to,
+      message
     })
   };
 }

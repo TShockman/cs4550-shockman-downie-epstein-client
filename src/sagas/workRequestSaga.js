@@ -19,19 +19,24 @@ import {redirect} from '../actions/navigationActions';
 import {selectUserState} from '../selectors/userSelector';
 import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 import CommentService from '../services/CommentService';
+import UserService from '../services/UserService';
 
 const workRequestService = WorkRequestService.instance;
 const commentService = CommentService.instance;
+const userService = UserService.instance;
 
 function * getWorkRequestSaga({wrid}) {
   console.log('Getting workRequest:', wrid);
   const workRequest = yield call(workRequestService.getWorkRequest, wrid);
 
   if (workRequest) {
-    yield put({type: GET_WORK_REQUEST_FULFILLED, workRequest});
-  } else {
-    console.error('Failed to retrieve workRequest');
+    const owner = yield call(userService.getUser, workRequest.ownerId);
+    if (owner) {
+      workRequest.owner = owner;
+      return yield put({type: GET_WORK_REQUEST_FULFILLED, workRequest});
+    }
   }
+  console.error('Failed to retrieve workRequest');
 }
 
 function * createWorkRequestSaga({workRequest}) {

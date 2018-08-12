@@ -7,6 +7,7 @@ import {
 } from '../../../actions/workRequestActions';
 import {selectWorkRequestState} from '../../../selectors/workRequestSelector';
 import {selectUserState} from '../../../selectors/userSelector';
+import {DRAFT_MESSAGE} from '../../../actions/messageActions';
 
 
 function mapStateToProps(state) {
@@ -34,6 +35,11 @@ function mapDispatchToProps(dispatch) {
       type: DELETE_WR_COMMENT_REQUESTED,
       cid,
       wrid
+    }),
+    draftMessage: (to, message) => dispatch({
+      type: DRAFT_MESSAGE,
+      to,
+      message
     })
   };
 }

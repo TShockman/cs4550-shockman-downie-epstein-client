@@ -16,19 +16,24 @@ import {redirect} from '../actions/navigationActions';
 import {selectUserState} from '../selectors/userSelector';
 import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 import CommentService from '../services/CommentService';
+import UserService from '../services/UserService';
 
 const blogPostService = BlogPostService.instance;
 const commentService = CommentService.instance;
+const userService = UserService.instance;
 
 function * getBlogPostSaga({bpid}) {
   console.log('Getting blogPost:', bpid);
   const blogPost = yield call(blogPostService.getBlogPost, bpid);
 
   if (blogPost) {
-    yield put({type: GET_BLOG_POST_FULFILLED, blogPost});
-  } else {
-    console.error('Failed to retrieve blogPost');
+    const owner = yield call(userService.getUser, blogPost.ownerId);
+    if(owner) {
+      blogPost.owner = owner;
+      return yield put({type: GET_BLOG_POST_FULFILLED, blogPost});
+    }
   }
+  console.error('Failed to retrieve blogPost');
 }
 
 function * createBlogPostSaga({blogPost}) {

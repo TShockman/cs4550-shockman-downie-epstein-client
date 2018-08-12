@@ -13,7 +13,8 @@ export default class BlogPost extends Component {
     match: PropTypes.object.isRequired, //router,
     history: PropTypes.object.isRequired, //router
     createComment: PropTypes.func.isRequired,
-    deleteComment: PropTypes.func.isRequired
+    deleteComment: PropTypes.func.isRequired,
+    draftMessage: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -56,6 +57,16 @@ export default class BlogPost extends Component {
     )
   };
 
+  handleMessage = () => {
+    const {draftMessage, currentBlogPost} = this.props;
+    const to = currentBlogPost.owner.username;
+    const message = {
+      subject: currentBlogPost.title,
+      body: ''
+    };
+    draftMessage(to, message);
+  };
+
   render() {
     const {match, currentBlogPost, user} = this.props;
 
@@ -76,7 +87,8 @@ export default class BlogPost extends Component {
             <h3>Modified</h3>
             <p>{currentBlogPost.modified}</p>
             <h3>Owner</h3>
-            <p>{currentBlogPost.owner}</p>
+            <p>{currentBlogPost.owner.username}</p>
+            <Button onClick={this.handleMessage}>Message Owner About This Blog Post</Button>
           </Col>
         </Row>
         <Row>
