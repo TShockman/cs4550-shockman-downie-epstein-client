@@ -6,7 +6,7 @@ import {GET_PROFILE_REQUESTED} from '../../../actions/userActions';
 
 
 function mapStateToProps(state) {
-  const {user} = selectUserState(state)
+  const {user} = selectUserState(state);
   return {
     user
   };
@@ -15,7 +15,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     draftMessage: () => dispatch({
-      type: DRAFT_MESSAGE
+      type: DRAFT_MESSAGE,
+      to: '',
+      message: {
+        subject: '',
+        body: ''
+      }
     }),
     getProfile: () => dispatch({
       type: GET_PROFILE_REQUESTED

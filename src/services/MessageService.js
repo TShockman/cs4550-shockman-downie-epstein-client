@@ -1,4 +1,4 @@
-import {PROFILE_MESSAGE_URL, parseResponse, USER_URL} from './api';
+import {PROFILE_MESSAGE_URL, parseResponse, USER_URL, MESSAGE_URL} from './api';
 
 const _singleton = Symbol();
 
@@ -25,6 +25,11 @@ export default class MessageService {
       },
       body: JSON.stringify(message)
     }).then(parseResponse);
+  }
+
+  getMessage(mid) {
+    return fetch(`${MESSAGE_URL}/${mid}`)
+      .then(parseResponse);
   }
 
 }

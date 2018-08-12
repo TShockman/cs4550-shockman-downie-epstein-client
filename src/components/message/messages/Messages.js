@@ -59,7 +59,7 @@ export default class Messages extends Component {
 
   startDraft = () => {
     const {draftMessage} = this.props;
-    draftMessage('barackobama', 'sup lol');
+    draftMessage();
   };
 
   render() {

@@ -82,4 +82,9 @@ export default class UserService {
       credentials: 'include'
     }).then(parseResponse);
   }
+
+  getUser(uid) {
+    return fetch(`${USER_URL}/${uid}`)
+      .then(parseResponse);
+  }
 }

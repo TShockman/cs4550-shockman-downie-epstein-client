@@ -15,6 +15,7 @@ export const WORK_REQUEST_QUERY_URL = `${WORK_REQUEST_URL}/search`;
 export const BLOG_POST_URL = `${API_URL}/blogPost`;
 export const BLOG_POST_QUERY_URL = `${BLOG_POST_URL}/search`;
 export const COMMENT_URL = `${API_URL}/comment`;
+export const MESSAGE_URL = `${API_URL}/message`;
 
 export const parseResponse = response => {
   if (response.ok) {
