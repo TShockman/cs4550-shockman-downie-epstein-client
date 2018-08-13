@@ -6,6 +6,7 @@ import {
   GET_LISTING_FULFILLED, GET_LISTING_REQUESTED,
   GET_USER_LISTINGS_FULFILLED, GET_USER_LISTINGS_REQUESTED, QUERY_LISTING_FULFILLED
 } from '../actions/listingActions';
+import {createdSort} from '../utils';
 
 const ListingState = Record({
   listings: [], // list of listings
@@ -33,7 +34,9 @@ export default (state = initialState, action) => {
       return state.set('currentListing', action.listing);
     }
     case GET_ALL_LISTINGS_FULFILLED: {
-      return state.set('listings', action.listings);
+      const listings = action.listings;
+      listings.sort(createdSort);
+      return state.set('listings', listings);
     }
     case GET_USER_LISTINGS_FULFILLED: {
       return state.set('currentListings', action.listings);

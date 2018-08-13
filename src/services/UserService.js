@@ -1,4 +1,5 @@
-import {LOGIN_URL, LOGOUT_URL, parseResponse, PROFILE_URL, USER_URL} from './api';
+import {LOGIN_URL, LOGOUT_URL, PROFILE_BP_URL, PROFILE_WR_URL, PROFILE_L_URL, PROFILE_URL, USER_URL} from './api';
+import {parseResponse} from '../utils';
 
 const _singleton = Symbol();
 
@@ -60,5 +61,31 @@ export default class UserService {
       method: 'delete',
       credentials: 'include'
     }).then(response => response.ok);
+  }
+
+  getProfileBlogPosts() {
+    return fetch(PROFILE_BP_URL, {
+      method: 'get',
+      credentials: 'include'
+    }).then(parseResponse);
+  }
+
+  getProfileListings() {
+    return fetch(PROFILE_L_URL, {
+      method: 'get',
+      credentials: 'include'
+    }).then(parseResponse);
+  }
+
+  getProfileWorkRequests() {
+    return fetch(PROFILE_WR_URL, {
+      method: 'get',
+      credentials: 'include'
+    }).then(parseResponse);
+  }
+
+  getUser(uid) {
+    return fetch(`${USER_URL}/${uid}`)
+      .then(parseResponse);
   }
 }

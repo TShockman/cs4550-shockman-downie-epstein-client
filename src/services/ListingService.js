@@ -1,4 +1,5 @@
-import {LISTING_QUERY_URL, LISTING_URL, parseResponse, USER_URL} from './api';
+import {BLOG_POST_URL, LISTING_QUERY_URL, LISTING_URL, USER_URL} from './api';
+import {parseResponse} from '../utils';
 
 const _singleton = Symbol();
 
@@ -57,6 +58,17 @@ export default class ListingService {
         'Content-Type': 'application/text'
       },
       body: query
+    }).then(parseResponse);
+  }
+
+  addComment(comment, lid) {
+    return fetch(`${LISTING_URL}/${lid}/comment`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(comment)
     }).then(parseResponse);
   }
 }
