@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Loading from '../../common/Loading';
 import {Row, Col, ListGroup, ListGroupItem, Input, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {formatDate} from '../../../utils';
 
 export default class WorkRequest extends Component {
   static propTypes = {
@@ -52,7 +53,7 @@ export default class WorkRequest extends Component {
 
     return (
       <ListGroupItem key={c.id}>
-        <strong>{c.owner.username}</strong>: {c.comment} {deleteButton}
+        <Link to={`/user/${c.owner.id}`}><strong>{c.owner.username}</strong></Link>: {c.comment} {deleteButton}
       </ListGroupItem>
     )
   };
@@ -99,11 +100,11 @@ export default class WorkRequest extends Component {
             <p>{currentWorkRequest.compensation}</p>
             {this.getImages()}
             <h3>Created</h3>
-            <p>{currentWorkRequest.created}</p>
+            <p>{formatDate(currentWorkRequest.created)}</p>
             <h3>Modified</h3>
-            <p>{currentWorkRequest.modified}</p>
+            <p>{formatDate(currentWorkRequest.modified)}</p>
             <h3>Owner</h3>
-            <p>{currentWorkRequest.owner.username}</p>
+            <p><Link to={`/user/${currentWorkRequest.owner.id}`}>{currentWorkRequest.owner.username}</Link></p>
             <Button onClick={this.handleMessage}>Message Owner About This Work Request</Button>
           </Col>
         </Row>

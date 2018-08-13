@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Loading from '../../common/Loading';
 import {Row, Col, ListGroup, ListGroupItem, Input, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {formatDate} from '../../../utils';
 
 export default class BlogPost extends Component {
   static propTypes = {
@@ -52,7 +53,7 @@ export default class BlogPost extends Component {
 
     return (
       <ListGroupItem key={c.id}>
-        <strong>{c.owner.username}</strong>: {c.comment} {deleteButton}
+        <Link to={`/user/${c.owner.id}`}><strong>{c.owner.username}</strong></Link>: {c.comment} {deleteButton}
       </ListGroupItem>
     )
   };
@@ -97,11 +98,11 @@ export default class BlogPost extends Component {
             <p>{currentBlogPost.description}</p>
             {this.getImages()}
             <h3>Created</h3>
-            <p>{currentBlogPost.created}</p>
+            <p>{formatDate(currentBlogPost.created)}</p>
             <h3>Modified</h3>
-            <p>{currentBlogPost.modified}</p>
+            <p>{formatDate(currentBlogPost.modified)}</p>
             <h3>Owner</h3>
-            <p>{currentBlogPost.owner.username}</p>
+            <p><Link to={`/user/${currentBlogPost.owner.id}`}>{currentBlogPost.owner.username}</Link></p>
             <Button onClick={this.handleMessage}>Message Owner About This Blog Post</Button>
           </Col>
         </Row>
