@@ -85,9 +85,14 @@ export default class Profile extends Component {
         <Row>
           <Col>
             <h3>User Actions</h3>
+              <h5> Twitter Link:
+                  <input onChange={this.somefunction} id="twitterUrl" name="twitterUrl" placeholder="god"/>
+              </h5>
+            <Button color="info" onClick={this.saveTwitter}>Save Twitter Info</Button>
             <Button onClick={logout}>Logout</Button>
             <Button color="danger" onClick={deleteAccount}>Delete Account</Button>
             <Link to="/profile/message" className="btn btn-primary">Messages</Link>
+
           </Col>
           {user.role === 'DESIGNER' &&
             <Col>
