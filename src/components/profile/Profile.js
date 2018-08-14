@@ -75,8 +75,16 @@ export default class Profile extends Component {
     ));
   };
 
+  handleDelete = () => {
+    const {deleteAccount} = this.props;
+    const confirmed = window.confirm('Are you sure you want to delete your account? This is permanent.');
+    if (confirmed) {
+      deleteAccount()
+    }
+  };
+
   render() {
-    const {user, logout, deleteAccount} = this.props;
+    const {user, logout} = this.props;
 
     if (!user) {
       return <Loading/>;
@@ -89,7 +97,7 @@ export default class Profile extends Component {
           <Col>
             <h3>User Actions</h3>
             <Button onClick={logout}>Logout</Button>
-            <Button color="danger" onClick={deleteAccount}>Delete Account</Button>
+            <Button color="danger" onClick={this.handleDelete}>Delete Account</Button>
             <Link to="/profile/message" className="btn btn-primary">Messages</Link>
           </Col>
           {user.role === 'DESIGNER' &&
