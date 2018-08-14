@@ -1,6 +1,7 @@
 import {Record} from 'immutable';
 import {DELETE_PROFILE, GET_PROFILE_FULFILLED, LOGIN_USER_FULFILLED, LOGOUT} from '../actions/userActions';
 import {DELETE_LISTING_FULFILLED} from '../actions/listingActions';
+import {SET_USER_LOCATION_FULFILLED} from '../actions/googleApiActions'
 
 const UserState = Record({
   user: null
@@ -21,6 +22,7 @@ export default (state = initialState, action) => {
       user.listings = user.listings.filter(listing => listing.id !== action.lid);
       return state.set('user', user);
     }
+    case SET_USER_LOCATION_FULFILLED: return state.set('user', action.user);
     default: {
       return state;
     }
