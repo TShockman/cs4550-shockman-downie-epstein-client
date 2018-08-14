@@ -1,13 +1,14 @@
 import {connect} from 'react-redux'
 import WorkRequest from './WorkRequest';
 import {
-  CREATE_WR_COMMENT_REQUESTED,
+  CREATE_WR_COMMENT_REQUESTED, DELETE_WORK_REQUEST_REQUESTED,
   DELETE_WR_COMMENT_REQUESTED,
   GET_WORK_REQUEST_REQUESTED
 } from '../../../actions/workRequestActions';
 import {selectWorkRequestState} from '../../../selectors/workRequestSelector';
 import {selectUserState} from '../../../selectors/userSelector';
 import {DRAFT_MESSAGE} from '../../../actions/messageActions';
+import {GET_PROFILE_REQUESTED} from '../../../actions/userActions';
 
 
 function mapStateToProps(state) {
@@ -40,6 +41,13 @@ function mapDispatchToProps(dispatch) {
       type: DRAFT_MESSAGE,
       to,
       message
+    }),
+    getProfile: () => dispatch({
+      type: GET_PROFILE_REQUESTED
+    }),
+    deleteWorkRequest: wrid => dispatch({
+      type: DELETE_WORK_REQUEST_REQUESTED,
+      wrid
     })
   };
 }

@@ -15,7 +15,9 @@ export default class BlogPost extends Component {
     history: PropTypes.object.isRequired, //router
     createComment: PropTypes.func.isRequired,
     deleteComment: PropTypes.func.isRequired,
-    draftMessage: PropTypes.func.isRequired
+    draftMessage: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired,
+    deleteBlogPost: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -26,8 +28,9 @@ export default class BlogPost extends Component {
   }
 
   componentDidMount = () => {
-    const {getBlogPost, match} = this.props;
+    const {getBlogPost, match, getProfile} = this.props;
     getBlogPost(match.params.bpid);
+    getProfile();
   };
 
   handleChange = event => {
@@ -81,13 +84,20 @@ export default class BlogPost extends Component {
     )
   };
 
+  handleDelete = () => {
+    const {deleteBlogPost, currentBlogPost, history} = this.props;
+    deleteBlogPost(currentBlogPost.id);
+    history.push('/');
+  };
+
   render() {
-    const {match, currentBlogPost, user} = this.props;
+    const {match, currentBlogPost, user, deleteBlogPost} = this.props;
 
     if (!currentBlogPost || String(currentBlogPost.id) !== match.params.bpid) {
       return <Loading/>
     }
 
+    console.log('USER', user, 'BLOG PSOT', currentBlogPost)
     return (
       <div>
         <Row>
@@ -104,6 +114,9 @@ export default class BlogPost extends Component {
             <h3>Owner</h3>
             <p><Link to={`/user/${currentBlogPost.owner.id}`}>{currentBlogPost.owner.username}</Link></p>
             <Button onClick={this.handleMessage}>Message Owner About This Blog Post</Button>
+            {user
+              && (user.id === currentBlogPost.owner.id || user.role === 'ADMIN')
+              && <Button onClick={this.handleDelete} color="danger">Delete</Button>}
           </Col>
         </Row>
         <Row>

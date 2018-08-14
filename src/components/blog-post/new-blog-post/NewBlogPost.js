@@ -6,7 +6,8 @@ import {Redirect} from 'react-router-dom';
 export default class NewBlogPost extends Component {
   static propTypes = {
     user: PropTypes.object,
-    createBlogPost: PropTypes.func.isRequired
+    createBlogPost: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -17,6 +18,10 @@ export default class NewBlogPost extends Component {
       imageSrcs: ''
     };
   }
+
+  componentDidMount = () => {
+    this.props.getProfile();
+  };
 
   handleFormUpdate = event => {
     const {target} = event;

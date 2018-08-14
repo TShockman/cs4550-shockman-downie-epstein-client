@@ -15,7 +15,9 @@ export default class Listing extends Component {
     history: PropTypes.object.isRequired, //router
     createComment: PropTypes.func.isRequired,
     deleteComment: PropTypes.func.isRequired,
-    draftMessage: PropTypes.func.isRequired
+    draftMessage: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired,
+    deleteListing: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -26,8 +28,9 @@ export default class Listing extends Component {
   }
 
   componentDidMount = () => {
-    const {getListing, match} = this.props;
+    const {getListing, match, getProfile} = this.props;
     getListing(match.params.lid);
+    getProfile();
   };
 
   handleChange = event => {
@@ -81,8 +84,15 @@ export default class Listing extends Component {
     )
   };
 
+  handleDelete = () => {
+    const {deleteListing, currentListing, history} = this.props;
+    deleteListing(currentListing.id);
+    history.push('/');
+  };
+
+
   render() {
-    const {match, currentListing, user} = this.props;
+    const {match, currentListing, user, deleteListing} = this.props;
 
     if (!currentListing || String(currentListing.id) !== match.params.lid) {
       return <Loading/>
@@ -106,6 +116,9 @@ export default class Listing extends Component {
             <h3>Owner</h3>
             <p><Link to={`/user/${currentListing.owner.id}`}>{currentListing.owner.username}</Link></p>
             <Button onClick={this.handleMessage}>Message Owner About This Listing</Button>
+            {user
+              && (user.id === currentListing.owner.id || user.role === 'ADMIN')
+              && <Button onClick={this.handleDelete} color="danger">Delete</Button>}
           </Col>
         </Row>
         <Row>
