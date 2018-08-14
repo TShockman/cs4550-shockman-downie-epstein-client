@@ -107,6 +107,10 @@ export default class Listing extends Component {
             <p><Link to={`/user/${currentListing.owner.id}`}>{currentListing.owner.username}</Link></p>
             <Button onClick={this.handleMessage}>Message Owner About This Listing</Button>
           </Col>
+          <Col>
+            <h3>This is where the twitter timeline would go</h3>
+            <h3>This is where there would be a follow button for that user</h3>
+          </Col>
         </Row>
         <Row>
           <Col>
