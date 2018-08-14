@@ -31,6 +31,7 @@ export default class Profile extends Component {
         {blogPost.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteBlogPost(blogPost.id)}><i className="fa fa-trash"/></Button>
+          <Link to={`/blogPost/${blogPost.id}/update`} className="btn btn-secondary"><i className="fa fa-pencil"/></Link>
           <Link to={`/blogPost/${blogPost.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
         </span>
       </ListGroupItem>
@@ -48,6 +49,7 @@ export default class Profile extends Component {
         {workRequest.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteWorkRequest(workRequest.id)}><i className="fa fa-trash"/></Button>
+          <Link to={`/workRequest/${workRequest.id}/update`} className="btn btn-secondary"><i className="fa fa-pencil"/></Link>
           <Link to={`/workRequest/${workRequest.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
         </span>
       </ListGroupItem>
@@ -66,6 +68,7 @@ export default class Profile extends Component {
         {listing.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteListing(listing.id)}><i className="fa fa-trash"/></Button>
+          <Link to={`/listing/${listing.id}/update`} className="btn btn-secondary"><i className="fa fa-pencil"/></Link>
           <Link to={`/listing/${listing.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
         </span>
       </ListGroupItem>

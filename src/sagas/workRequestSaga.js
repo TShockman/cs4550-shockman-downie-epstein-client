@@ -12,7 +12,11 @@ import {
   GET_USER_WORK_REQUESTS_REQUESTED,
   QUERY_WORK_REQUEST_FULFILLED,
   QUERY_WORK_REQUEST_REQUESTED,
-  CREATE_WR_COMMENT_FULFILLED, DELETE_WR_COMMENT_FULFILLED, DELETE_WR_COMMENT_REQUESTED, CREATE_WR_COMMENT_REQUESTED
+  CREATE_WR_COMMENT_FULFILLED,
+  DELETE_WR_COMMENT_FULFILLED,
+  DELETE_WR_COMMENT_REQUESTED,
+  CREATE_WR_COMMENT_REQUESTED,
+  UPDATE_WR_REQUESTED, UPDATE_WR_FULFILLED
 } from '../actions/workRequestActions';
 import WorkRequestService from '../services/WorkRequestService';
 import {redirect} from '../actions/navigationActions';
@@ -131,6 +135,18 @@ function * deleteCommentSaga({cid, wrid}) {
   }
 }
 
+function * updateWorkRequestSaga({workRequest}) {
+  console.log('Updating work request:', workRequest);
+  const updated = yield call(workRequestService.updateWorkRequest, workRequest);
+
+  if (updated) {
+    yield put({type: UPDATE_WR_FULFILLED, workRequest: updated});
+    yield put(redirect(`/workRequest/${workRequest.id}`));
+  } else {
+    console.error('Failed to update work request');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_WORK_REQUEST_REQUESTED, getWorkRequestSaga),
@@ -140,6 +156,7 @@ export default function * rootSaga () {
     fork(takeLatest, DELETE_WORK_REQUEST_REQUESTED, deleteWorkRequestSaga),
     fork(takeLatest, QUERY_WORK_REQUEST_REQUESTED, queryWorkRequestSaga),
     fork(takeEvery, DELETE_WR_COMMENT_REQUESTED, deleteCommentSaga),
-    fork(takeEvery, CREATE_WR_COMMENT_REQUESTED, createCommentSaga)
+    fork(takeEvery, CREATE_WR_COMMENT_REQUESTED, createCommentSaga),
+    fork(takeEvery, UPDATE_WR_REQUESTED, updateWorkRequestSaga)
   ])
 }
