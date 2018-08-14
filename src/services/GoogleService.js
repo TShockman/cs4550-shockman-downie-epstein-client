@@ -12,7 +12,7 @@ export default class GoogleService {
 
     static get instance() {
         if (!this[_singleton]) {
-            this[_singleton] = new UserService(_singleton);
+            this[_singleton] = new GoogleService(_singleton);
         }
         return this[_singleton];
     }
@@ -22,8 +22,7 @@ export default class GoogleService {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
+            }
         }).then(parseResponse);
 
     }
@@ -34,7 +33,7 @@ export default class GoogleService {
     }
 
     setLocation(lat, lng, city) {
-        return fetch(LOCATION_SET_URL + '/' + city + '/' + lat + '/' + lon, {
+        return fetch(LOCATION_SET_URL + '/' + city + '/' + lat + '/' + lng, {
             credentials: 'include'
         })
             .then(parseResponse)
