@@ -74,7 +74,7 @@ export default class Profile extends Component {
   };
 
   render() {
-    const {user, logout, deleteAccount} = this.props;
+    const {user, logout, deleteAccount, setLocation} = this.props;
 
     if (!user) {
       return <Loading/>;
