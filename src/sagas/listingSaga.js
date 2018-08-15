@@ -10,7 +10,7 @@ import {
   GET_LISTING_FULFILLED,
   GET_LISTING_REQUESTED,
   GET_USER_LISTINGS_FULFILLED,
-  GET_USER_LISTINGS_REQUESTED, QUERY_LISTING_FULFILLED, QUERY_LISTING_REQUESTED
+  GET_USER_LISTINGS_REQUESTED, QUERY_LISTING_FULFILLED, QUERY_LISTING_REQUESTED, UPDATE_L_FULFILLED, UPDATE_L_REQUESTED
 } from '../actions/listingActions';
 import ListingService from '../services/ListingService';
 import {redirect} from '../actions/navigationActions';
@@ -18,6 +18,7 @@ import {selectUserState} from '../selectors/userSelector';
 import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 import CommentService from '../services/CommentService';
 import UserService from '../services/UserService';
+import {UPDATE_BP_FULFILLED} from '../actions/blogPostActions';
 
 
 const listingService = ListingService.instance;
@@ -130,6 +131,18 @@ function * deleteCommentSaga({cid, lid}) {
   }
 }
 
+function * updateListingSaga({listing}) {
+  console.log('Updating listing:', listing);
+  const updated = yield call(listingService.updateListing, listing);
+
+  if (updated) {
+    yield put({type: UPDATE_L_FULFILLED, listing: updated});
+    yield put(redirect(`/listing/${listing.id}`));
+  } else {
+    console.error('Failed to update listing');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_LISTING_REQUESTED, getListingSaga),
@@ -139,6 +152,7 @@ export default function * rootSaga () {
     fork(takeLatest, DELETE_LISTING_REQUESTED, deleteListingSaga),
     fork(takeLatest, QUERY_LISTING_REQUESTED, queryListingSaga),
     fork(takeEvery, DELETE_L_COMMENT_REQUESTED, deleteCommentSaga),
-    fork(takeEvery, CREATE_L_COMMENT_REQUESTED, createCommentSaga)
+    fork(takeEvery, CREATE_L_COMMENT_REQUESTED, createCommentSaga),
+    fork(takeEvery, UPDATE_L_REQUESTED, updateListingSaga)
   ])
 }

@@ -2,6 +2,7 @@ import {connect} from 'react-redux'
 import NewListing from './NewListing';
 import {CREATE_LISTING_REQUESTED, GET_LISTING_REQUESTED} from '../../../actions/listingActions';
 import {selectUserState} from '../../../selectors/userSelector';
+import {GET_PROFILE_REQUESTED} from '../../../actions/userActions';
 
 
 function mapStateToProps(state) {
@@ -16,6 +17,9 @@ function mapDispatchToProps(dispatch) {
     createListing: listing => dispatch({
       type: CREATE_LISTING_REQUESTED,
       listing
+    }),
+    getProfile: () => dispatch({
+      type: GET_PROFILE_REQUESTED
     })
   };
 }

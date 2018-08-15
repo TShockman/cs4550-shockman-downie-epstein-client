@@ -6,7 +6,8 @@ import {Redirect} from 'react-router-dom';
 export default class NewWorkRequest extends Component {
   static propTypes = {
     user: PropTypes.object,
-    createWorkRequest: PropTypes.func.isRequired
+    createWorkRequest: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -18,6 +19,10 @@ export default class NewWorkRequest extends Component {
       imageSrcs: ''
     };
   }
+
+  componentDidMount = () => {
+    this.props.getProfile();
+  };
 
   handleFormUpdate = event => {
     const {target} = event;

@@ -15,7 +15,9 @@ export default class WorkRequest extends Component {
     history: PropTypes.object.isRequired, //router
     createComment: PropTypes.func.isRequired,
     deleteComment: PropTypes.func.isRequired,
-    draftMessage: PropTypes.func.isRequired
+    draftMessage: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired,
+    deleteWorkRequest: PropTypes.func.isRequired,
   };
 
   constructor() {
@@ -26,7 +28,7 @@ export default class WorkRequest extends Component {
   }
   
   componentDidMount = () => {
-    const {getWorkRequest, match} = this.props;
+    const {getWorkRequest, match, getProfile} = this.props;
     getWorkRequest(match.params.wrid);
   };
 
@@ -81,8 +83,14 @@ export default class WorkRequest extends Component {
     )
   };
 
+  handleDelete = () => {
+    const {deleteWorkRequest, currentWorkRequest, history} = this.props;
+    deleteWorkRequest(currentWorkRequest.id);
+    history.push('/');
+  };
+
   render() {
-    const {match, currentWorkRequest, user} = this.props;
+    const {match, currentWorkRequest, user, deleteWorkRequest} = this.props;
 
     if (!currentWorkRequest || String(currentWorkRequest.id) !== match.params.wrid) {
       return <Loading/>
@@ -105,7 +113,10 @@ export default class WorkRequest extends Component {
             <p>{formatDate(currentWorkRequest.modified)}</p>
             <h3>Owner</h3>
             <p><Link to={`/user/${currentWorkRequest.owner.id}`}>{currentWorkRequest.owner.username}</Link></p>
-            <Button onClick={this.handleMessage}>Message Owner About This Work Request</Button>
+            {user && <Button onClick={this.handleMessage}>Message Owner About This Work Request</Button>}
+            {user
+              && (user.id === currentWorkRequest.owner.id || user.role === 'ADMIN')
+              && <Button onClick={this.handleDelete} color="danger">Delete</Button>}
           </Col>
         </Row>
         <Row>
