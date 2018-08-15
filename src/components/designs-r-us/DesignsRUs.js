@@ -26,6 +26,7 @@ import ListBlogPosts from '../blog-post/list-blog-posts/ListBlogPostsContainer';
 import UpdateWorkRequest from '../work-request/update-work-request/UpdateWorkRequestContainer';
 import UpdateBlogPost from '../blog-post/update-blog-post/UpdateBlogPostContainer';
 import UpdateListing from '../listing/update-listing/UpdateListingContainer';
+import UpdateProfile from '../update-profile/UpdateProfileContainer';
 
 // import styling
 import 'bootstrap/dist/css/bootstrap.css';
@@ -46,6 +47,7 @@ export default class DesignsRUs extends Component {
                 <Route path="/register" component={Register}/>
                 <Route path="/login" component={Login}/>
                 <Route exact path="/profile" component={Profile}/>
+                <Route exact path="/profile/update" component={UpdateProfile}/>
 
                 <Route exact path="/listing" component={ListListings}/>
                 <Route path="/listing/search" component={Listings}/>

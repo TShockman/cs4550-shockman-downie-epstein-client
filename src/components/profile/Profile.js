@@ -85,7 +85,7 @@ export default class Profile extends Component {
   };
 
   render() {
-    const {user, logout, deleteAccount, setLocation} = this.props;
+    const {user, logout, setLocation} = this.props;
 
     if (!user) {
       return <Loading/>;
@@ -97,11 +97,17 @@ export default class Profile extends Component {
         <Row>
           <Col>
             <h3>User Actions</h3>
-            Current Location: {this.props.user.city}
-              <Button onClick={setLocation}>Set Location</Button>
             <Button onClick={logout}>Logout</Button>
             <Button color="danger" onClick={this.handleDelete}>Delete Account</Button>
             <Link to="/profile/message" className="btn btn-primary">Messages</Link>
+            <Link to="/profile/update" className="btn btn-warning">Update Profile</Link>
+          </Col>
+          <Col>
+            <h3>User Information</h3>
+            <p><strong>Username: </strong>{user.username}</p>
+            <p><strong>Name: </strong>{user.name}</p>
+            <p><strong>Date of Birth: </strong>{user.dateOfBirth}</p>
+            <p><strong>Location: </strong>{user.city} <Button onClick={setLocation}>Update Location</Button></p>
           </Col>
           {user.role === 'DESIGNER' &&
             <Col>

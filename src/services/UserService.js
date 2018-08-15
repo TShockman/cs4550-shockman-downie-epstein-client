@@ -88,4 +88,15 @@ export default class UserService {
     return fetch(`${USER_URL}/${uid}`)
       .then(parseResponse);
   }
+
+  updateProfile(user) {
+    return fetch(`${PROFILE_URL}`, {
+      credentials: 'include',
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    }).then(parseResponse);
+  }
 }

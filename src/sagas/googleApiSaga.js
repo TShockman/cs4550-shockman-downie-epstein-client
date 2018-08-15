@@ -6,6 +6,7 @@ import {
     SET_USER_LOCATION_FULFILLED
 } from '../actions/googleApiActions';
 import googleService from '../services/GoogleService'
+import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 
 const service = googleService.instance;
 
@@ -27,6 +28,7 @@ function *  getLocation() {
             if (finalProduct) {
                 console.log("saved location in DB" + finalProduct);
                 yield put({type: SET_USER_LOCATION_FULFILLED, user: finalProduct});
+                yield put({type: GET_PROFILE_REQUESTED});
             } else {
                 console.log("could not save location in db for some reason");
             }

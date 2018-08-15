@@ -22,7 +22,6 @@ export default (state = initialState, action) => {
       user.listings = user.listings.filter(listing => listing.id !== action.lid);
       return state.set('user', user);
     }
-    case SET_USER_LOCATION_FULFILLED: return state.set('user', action.user);
     default: {
       return state;
     }
