@@ -6,6 +6,7 @@ import {DELETE_LISTING_REQUESTED, GET_USER_LISTINGS_REQUESTED} from '../../actio
 import {selectListingState} from '../../selectors/listingSelector';
 import {DELETE_WORK_REQUEST_REQUESTED} from '../../actions/workRequestActions';
 import {DELETE_BLOG_POST_REQUESTED} from '../../actions/blogPostActions';
+import {SET_USER_LOCATION_REQUESTED} from "../../actions/googleApiActions";
 
 
 function mapStateToProps(state) {
@@ -41,6 +42,9 @@ function mapDispatchToProps(dispatch) {
     deleteBlogPost: bpid => dispatch({
       type: DELETE_BLOG_POST_REQUESTED,
       bpid
+    }),
+    setLocation: () => dispatch({
+        type: SET_USER_LOCATION_REQUESTED
     })
   }
 }

@@ -12,7 +12,8 @@ export default class Profile extends Component {
     deleteAccount: PropTypes.func.isRequired,
     deleteListing: PropTypes.func.isRequired,
     deleteWorkRequest: PropTypes.func.isRequired,
-    deleteBlogPost: PropTypes.func.isRequired
+    deleteBlogPost: PropTypes.func.isRequired,
+    setLocation: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
@@ -84,7 +85,7 @@ export default class Profile extends Component {
   };
 
   render() {
-    const {user, logout} = this.props;
+    const {user, logout, deleteAccount, setLocation} = this.props;
 
     if (!user) {
       return <Loading/>;
@@ -96,6 +97,8 @@ export default class Profile extends Component {
         <Row>
           <Col>
             <h3>User Actions</h3>
+            Current Location: {this.props.user.city}
+              <Button onClick={setLocation}>Set Location</Button>
             <Button onClick={logout}>Logout</Button>
             <Button color="danger" onClick={this.handleDelete}>Delete Account</Button>
             <Link to="/profile/message" className="btn btn-primary">Messages</Link>

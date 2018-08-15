@@ -5,6 +5,7 @@ import listingSaga from './listingSaga';
 import workRequestSaga from './workRequestSaga';
 import blogPostSaga from './blogPostSaga';
 import messageSaga from './messageSaga';
+import googleApiSaga from'./googleApiSaga'
 
 export default function * baseSaga() {
   yield all([
@@ -13,6 +14,7 @@ export default function * baseSaga() {
     fork(listingSaga),
     fork(workRequestSaga),
     fork(blogPostSaga),
-    fork(messageSaga)
+    fork(messageSaga),
+    fork(googleApiSaga)
   ])
 }
