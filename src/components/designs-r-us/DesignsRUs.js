@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import HttpsRedirect from 'react-https-redirect';
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
 import ProviderWithRouter from './ProviderWithRouter';
 import DesignsRUsNav from './DesignsRUsNav';
@@ -34,43 +35,45 @@ export default class DesignsRUs extends Component {
 
   render() {
     return (
-      <Router>
-        <ProviderWithRouter>
-          <div>
-            <DesignsRUsNav/>
-            <Switch>
-              <Route exact path="/" component={Homepage}/>
+      <HttpsRedirect>
+        <Router>
+          <ProviderWithRouter>
+            <div>
+              <DesignsRUsNav/>
+              <Switch>
+                <Route exact path="/" component={Homepage}/>
 
-              <Route path="/register" component={Register}/>
-              <Route path="/login" component={Login}/>
-              <Route exact path="/profile" component={Profile}/>
+                <Route path="/register" component={Register}/>
+                <Route path="/login" component={Login}/>
+                <Route exact path="/profile" component={Profile}/>
 
-              <Route exact path="/listing" component={ListListings}/>
-              <Route path="/listing/search" component={Listings}/>
-              <Route exact path="/listing/new" component={NewListing}/>
-              <Route exact path="/listing/:lid" component={Listing}/>
-              <Route exact path="/listing/:lid/update" component={UpdateListing}/>
+                <Route exact path="/listing" component={ListListings}/>
+                <Route path="/listing/search" component={Listings}/>
+                <Route exact path="/listing/new" component={NewListing}/>
+                <Route exact path="/listing/:lid" component={Listing}/>
+                <Route exact path="/listing/:lid/update" component={UpdateListing}/>
 
-              <Route exact path="/workRequest" component={ListWorkRequests}/>
-              <Route path="/workRequest/search" component={WorkRequests}/>
-              <Route exact path="/workRequest/new" component={NewWorkRequest}/>
-              <Route exact path="/workRequest/:wrid" component={WorkRequest}/>
-              <Route exact path="/workRequest/:wrid/update" component={UpdateWorkRequest}/>
+                <Route exact path="/workRequest" component={ListWorkRequests}/>
+                <Route path="/workRequest/search" component={WorkRequests}/>
+                <Route exact path="/workRequest/new" component={NewWorkRequest}/>
+                <Route exact path="/workRequest/:wrid" component={WorkRequest}/>
+                <Route exact path="/workRequest/:wrid/update" component={UpdateWorkRequest}/>
 
-              <Route exact path="/blogPost" component={ListBlogPosts}/>
-              <Route path="/blogPost/search" component={BlogPosts}/>
-              <Route exact path="/blogPost/new" component={NewBlogPost}/>
-              <Route exact path="/blogPost/:bpid" component={BlogPost}/>
-              <Route exact path="/blogPost/:bpid/update" component={UpdateBlogPost}/>
+                <Route exact path="/blogPost" component={ListBlogPosts}/>
+                <Route path="/blogPost/search" component={BlogPosts}/>
+                <Route exact path="/blogPost/new" component={NewBlogPost}/>
+                <Route exact path="/blogPost/:bpid" component={BlogPost}/>
+                <Route exact path="/blogPost/:bpid/update" component={UpdateBlogPost}/>
 
-              <Route exact path="/profile/message" component={Messages}/>
-              <Route exact path="/profile/message/new" component={NewMessage}/>
-              <Route path="/profile/message/:mid" component={Message}/>
-              <Redirect to="/"/>
-            </Switch>
-          </div>
-        </ProviderWithRouter>
-      </Router>
+                <Route exact path="/profile/message" component={Messages}/>
+                <Route exact path="/profile/message/new" component={NewMessage}/>
+                <Route path="/profile/message/:mid" component={Message}/>
+                <Redirect to="/"/>
+              </Switch>
+            </div>
+          </ProviderWithRouter>
+        </Router>
+      </HttpsRedirect>
     )
   }
 }
