@@ -30,7 +30,6 @@ export default class WorkRequest extends Component {
   componentDidMount = () => {
     const {getWorkRequest, match, getProfile} = this.props;
     getWorkRequest(match.params.wrid);
-    getProfile();
   };
 
   handleChange = event => {

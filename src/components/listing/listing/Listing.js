@@ -30,7 +30,6 @@ export default class Listing extends Component {
   componentDidMount = () => {
     const {getListing, match, getProfile} = this.props;
     getListing(match.params.lid);
-    getProfile();
   };
 
   handleChange = event => {

@@ -30,7 +30,6 @@ export default class BlogPost extends Component {
   componentDidMount = () => {
     const {getBlogPost, match, getProfile} = this.props;
     getBlogPost(match.params.bpid);
-    getProfile();
   };
 
   handleChange = event => {
