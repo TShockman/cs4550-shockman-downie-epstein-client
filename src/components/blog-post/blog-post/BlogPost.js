@@ -112,7 +112,7 @@ export default class BlogPost extends Component {
             <p>{formatDate(currentBlogPost.modified)}</p>
             <h3>Owner</h3>
             <p><Link to={`/user/${currentBlogPost.owner.id}`}>{currentBlogPost.owner.username}</Link></p>
-            <Button onClick={this.handleMessage}>Message Owner About This Blog Post</Button>
+            {user && <Button onClick={this.handleMessage}>Message Owner About This Blog Post</Button>}
             {user
               && (user.id === currentBlogPost.owner.id || user.role === 'ADMIN')
               && <Button onClick={this.handleDelete} color="danger">Delete</Button>}

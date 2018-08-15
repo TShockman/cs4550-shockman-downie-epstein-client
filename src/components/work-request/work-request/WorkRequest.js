@@ -113,7 +113,7 @@ export default class WorkRequest extends Component {
             <p>{formatDate(currentWorkRequest.modified)}</p>
             <h3>Owner</h3>
             <p><Link to={`/user/${currentWorkRequest.owner.id}`}>{currentWorkRequest.owner.username}</Link></p>
-            <Button onClick={this.handleMessage}>Message Owner About This Work Request</Button>
+            {user && <Button onClick={this.handleMessage}>Message Owner About This Work Request</Button>}
             {user
               && (user.id === currentWorkRequest.owner.id || user.role === 'ADMIN')
               && <Button onClick={this.handleDelete} color="danger">Delete</Button>}
