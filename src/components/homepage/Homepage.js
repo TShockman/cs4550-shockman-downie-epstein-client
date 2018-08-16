@@ -25,9 +25,9 @@ export default class Homepage extends Component {
     const {blogPosts} = this.props;
 
     return (
-      <ListGroup className="list-group">
+      <ListGroup className="list-group-item-action">
         {blogPosts.slice(0,5).map(blogPost => (
-          <ListGroupItem className="list-group-item " key={blogPost.id}>
+          <ListGroupItem className="list-group-item-action" key={blogPost.id}>
             <strong>{blogPost.title}</strong>
             <span className="float-right">
               <span className="mr-2">{formatDate(blogPost.created)}</span>
@@ -35,10 +35,10 @@ export default class Homepage extends Component {
             </span>
           </ListGroupItem>
         ))}
-        <ListGroupItem className="list-group-item">
+        <ListGroupItem className="list-group-item-action">
           <Link className="btn-outline-primary" to="/blogPost">All Blog Posts</Link>
         </ListGroupItem>
-        <ListGroupItem className="list-group-item">
+        <ListGroupItem className="list-group-item-action">
           <Link  className="btn-outline-primary" to="/blogPost/search">Search Blog Posts</Link>
         </ListGroupItem>
       </ListGroup>
@@ -49,9 +49,9 @@ export default class Homepage extends Component {
     const {listings} = this.props;
 
     return (
-      <ListGroup className="list-group">
+      <ListGroup className="list-group-item-action">
         {listings.slice(0,5).map(listing => (
-          <ListGroupItem className="list-group-item" key={listing.id}>
+          <ListGroupItem className="list-group-item-action" key={listing.id}>
             <strong>{listing.title}</strong>
             <span className="float-right">
               <span className="mr-2">{formatDate(listing.created)}</span>
@@ -59,10 +59,10 @@ export default class Homepage extends Component {
             </span>
           </ListGroupItem>
           ))}
-          <ListGroupItem className="list-group-item">
+          <ListGroupItem className="list-group-item-action">
             <Link  className="btn-outline-primary" to="/listing">All Listings</Link>
           </ListGroupItem>
-          <ListGroupItem className="list-group-item">
+          <ListGroupItem className="list-group-item-action">
             <Link  className="btn-outline-primary" to="/listing/search">Search Listings</Link>
           </ListGroupItem>
       </ListGroup>
@@ -73,9 +73,9 @@ export default class Homepage extends Component {
     const {workRequests} = this.props;
 
     return (
-      <ListGroup className="list-group">
+      <ListGroup className="list-group-item-action">
         {workRequests.slice(0,5).map(workRequest => (
-          <ListGroupItem className="list-group-item" key={workRequest.id}>
+          <ListGroupItem className="list-group-item-action" key={workRequest.id}>
             <strong>{workRequest.title}</strong>
             <span className="float-right">
               <span className="mr-2">{formatDate(workRequest.created)}</span>
@@ -83,10 +83,10 @@ export default class Homepage extends Component {
             </span>
           </ListGroupItem>
         ))}
-        <ListGroupItem className="list-group-item">
+        <ListGroupItem className="list-group-item-action">
           <Link  className="btn-outline-primary" to="/workRequest">All Work Requests</Link>
         </ListGroupItem>
-        <ListGroupItem className="list-group-item">
+        <ListGroupItem className="list-group-item-action">
           <Link  className="btn-outline-primary" to="/workRequest/search">Search Work Requests</Link>
         </ListGroupItem>
       </ListGroup>
