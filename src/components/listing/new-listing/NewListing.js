@@ -67,7 +67,7 @@ export default class NewListing extends Component {
           <Input onChange={this.handleFormUpdate} id="imageSrcs" name="imageSrcs" type="textarea"/>
           <FormText>One image source URL per line.</FormText>
         </FormGroup>
-        <Button onClick={this.handleSubmit}>Create Listing</Button>
+        <Button className="btn btn-primary" onClick={this.handleSubmit}>Create Listing</Button>
       </Form>
     );
   }

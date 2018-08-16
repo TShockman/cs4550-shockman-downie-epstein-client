@@ -41,9 +41,9 @@ export default class SearchWorkRequests extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group-item-action">
               {this.props.workRequests.map((workRequest, k) => {
-                return <ListGroupItem key={k}>
+                return <ListGroupItem className="list-group-item-action" key={k}>
                   {workRequest.title}
                   <Link to={`/workRequest/${workRequest.id}`} className="float-right btn btn-primary"><i className="fa fa-arrow-right"/></Link>
                 </ListGroupItem>;
