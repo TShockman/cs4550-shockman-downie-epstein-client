@@ -40,7 +40,8 @@ export default class Login extends Component {
     }
 
     return (
-      <Form className="form-control">
+    <div className="container-fluid">
+      <Form>
         <FormGroup>
           <Label for="username">Username</Label>
           <Input onChange={this.handleFormUpdate} id="username" name="username" placeholder="Jane_Doe"/>
@@ -51,6 +52,7 @@ export default class Login extends Component {
         </FormGroup>
         <Button className="btn btn-primary" onClick={this.handleSubmit}>Login</Button>
       </Form>
+    </div>
     );
   }
 }

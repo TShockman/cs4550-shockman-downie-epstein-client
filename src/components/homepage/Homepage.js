@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {formatDate} from '../../utils';
+import HERO_IMAGE from '../../images/Designs-R-Us.png'
 
 export default class Homepage extends Component {
   static propTypes = {
@@ -94,11 +95,14 @@ export default class Homepage extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid bg-light">
           <div className="row">
-              <div className="jumbotron">
-                <image src="../../images/Designs-R-Us.png" />
+              <div className="col-sm-3"></div>
+              <div className="col-sm-6">
+                  <img src={HERO_IMAGE} className="img-fluid " alt="Responsive image" />
               </div>
+              <div className="col-sm-3"></div>
+
           </div>
         <Row>
           <Col>

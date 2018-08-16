@@ -77,8 +77,8 @@ export default class BlogPost extends Component {
       return null;
     }
     return (
-      <ListGroup>
-        {srcs.map((src, k) => <ListGroupItem key={k}><img src={src}/></ListGroupItem>)}
+      <ListGroup className="list-group-item-action">
+        {srcs.map((src, k) => <ListGroupItem className="list-group-item-action" key={k}><img src={src}/></ListGroupItem>)}
       </ListGroup>
     )
   };
@@ -120,14 +120,14 @@ export default class BlogPost extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group-item-action">
               {currentBlogPost.comments.map(this.getCommentItem)}
               {user ?
-                <ListGroupItem>
+                <ListGroupItem className="list-group-item-action">
                   <Input onChange={this.handleChange} type="textarea" placeholder="Wow! Cool!" value={this.state.comment}/>
                   <Button className="btn btn-primary" onClick={this.handleComment}>Comment</Button>
                 </ListGroupItem> :
-                <ListGroupItem>Please <Link to="/login">login</Link> to comment.</ListGroupItem>
+                <ListGroupItem className="list-group-item-action">Please <Link to="/login">login</Link> to comment.</ListGroupItem>
               }
             </ListGroup>
           </Col>

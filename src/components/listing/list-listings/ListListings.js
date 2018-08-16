@@ -23,12 +23,12 @@ export default class ListListings extends Component {
     return (
       <Row>
         <Col>
-          <ListGroup className="list-group">
-            <ListGroupItem className="list-group-item">
+          <ListGroup className="list-group-item-action">
+            <ListGroupItem className="list-group-item-action">
               <Link className="btn btn-outline-info" to="/listing/search">Search Listings</Link>
             </ListGroupItem>
             {this.props.listings.map((listing, k) => {
-              return <ListGroupItem key={k}>
+              return <ListGroupItem className="list-group-item-action" key={k}>
                 <strong>{listing.title}</strong>
                 <span className="float-right">
                   <span className="mr-2">{formatDate(listing.created)}</span>

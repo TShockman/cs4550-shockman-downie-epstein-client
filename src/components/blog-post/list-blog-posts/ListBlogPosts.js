@@ -24,12 +24,12 @@ export default class ListBlogPosts extends Component {
         <div className="container-fluid">
       <Row>
         <Col>
-          <ListGroup>
-            <ListGroupItem>
+          <ListGroup className="list-group-item-action">
+            <ListGroupItem className="list-group-item-action">
               <Link className="btn btn-outline-info" to="/blogPost/search">Search Blog Posts</Link>
             </ListGroupItem>
             {this.props.blogPosts.map((blogPost, k) => {
-              return <ListGroupItem key={k}>
+              return <ListGroupItem className="list-group-item-action" key={k}>
                 <strong>{blogPost.title}</strong>
                 <span className="float-right">
                   <span className="mr-2">{formatDate(blogPost.created)}</span>

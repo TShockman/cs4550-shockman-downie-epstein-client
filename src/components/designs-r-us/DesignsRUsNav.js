@@ -26,7 +26,7 @@ export default class DesignsRUsNav extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div>
         <Navbar color="primary" light expand="lg">
             <Link className="navbar-brand" to="/"><i>Designs 'R 'Us</i></Link>
           <NavbarToggler onClick={this.toggle}/>

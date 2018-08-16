@@ -41,9 +41,9 @@ export default class SearchBlogPosts extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group-item-action">
               {this.props.blogPosts.map((blogPost, k) => {
-                return <ListGroupItem key={k}>
+                return <ListGroupItem className="list-group-item-action"key={k}>
                   {blogPost.title}
                   <Link to={`/blogPost/${blogPost.id}`} className="float-right btn btn-primary"><i className="fa fa-arrow-right"/></Link>
                 </ListGroupItem>;

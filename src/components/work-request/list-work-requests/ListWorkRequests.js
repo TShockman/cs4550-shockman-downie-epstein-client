@@ -23,12 +23,12 @@ export default class ListWorkRequests extends Component {
     return (
       <Row>
         <Col>
-          <ListGroup>
-            <ListGroupItem>
+          <ListGroup className="list-group-item-action">
+            <ListGroupItem className="list-group-item-action">
               <Link to="/workRequest/search">Search Work Requests</Link>
             </ListGroupItem>
             {this.props.workRequests.map((workRequest, k) => {
-              return <ListGroupItem key={k}>
+              return <ListGroupItem className="list-group-item-action" key={k}>
                 <strong>{workRequest.title}</strong>
                 <span className="float-right">
                   <span className="mr-2">{formatDate(workRequest.created)}</span>
