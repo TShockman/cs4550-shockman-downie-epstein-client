@@ -21,11 +21,12 @@ export default class ListBlogPosts extends Component {
     }
 
     return (
+        <div className="container-fluid">
       <Row>
         <Col>
           <ListGroup>
             <ListGroupItem>
-              <Link to="/blogPost/search">Search Blog Posts</Link>
+              <Link className="btn btn-outline-info" to="/blogPost/search">Search Blog Posts</Link>
             </ListGroupItem>
             {this.props.blogPosts.map((blogPost, k) => {
               return <ListGroupItem key={k}>
@@ -39,6 +40,7 @@ export default class ListBlogPosts extends Component {
           </ListGroup>
         </Col>
       </Row>
+    </div>
     );
   }
 }

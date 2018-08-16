@@ -27,10 +27,10 @@ export default class SearchListings extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
-            <Form>
+            <Form className="form-control">
               <FormGroup>
                 <Label for="query">Search:</Label>
                 <Input onChange={this.handleChange} id="query" name="query"/>
@@ -41,9 +41,9 @@ export default class SearchListings extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group">
               {this.props.listings.map((listing, k) => {
-                return <ListGroupItem key={k}>
+                return <ListGroupItem className="list-group-item" key={k}>
                   {listing.title}
                   <Link to={`/listing/${listing.id}`} className="float-right btn btn-primary"><i className="fa fa-arrow-right"/></Link>
                 </ListGroupItem>;

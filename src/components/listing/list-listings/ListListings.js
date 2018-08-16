@@ -23,9 +23,9 @@ export default class ListListings extends Component {
     return (
       <Row>
         <Col>
-          <ListGroup>
-            <ListGroupItem>
-              <Link to="/listing/search">Search Listings</Link>
+          <ListGroup className="list-group">
+            <ListGroupItem className="list-group-item">
+              <Link className="btn btn-outline-info" to="/listing/search">Search Listings</Link>
             </ListGroupItem>
             {this.props.listings.map((listing, k) => {
               return <ListGroupItem key={k}>

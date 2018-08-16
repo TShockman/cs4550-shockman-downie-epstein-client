@@ -81,7 +81,7 @@ export default class Profile extends Component {
     }
 
     return (
-      <div>
+      <div className="container-fluid">
         <h2>Welcome {user.username}!</h2>
         <Row>
           <Col>

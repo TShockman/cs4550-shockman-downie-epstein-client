@@ -27,10 +27,10 @@ export default class SearchBlogPosts extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
-            <Form>
+            <Form className="form-control">
               <FormGroup>
                 <Label for="query">Search:</Label>
                 <Input onChange={this.handleChange} id="query" name="query"/>

@@ -44,7 +44,7 @@ export default class NewListing extends Component {
     }
 
     return (
-      <Form>
+      <Form className="form-control">
         <FormGroup>
           <Label for="title">Title</Label>
           <Input onChange={this.handleFormUpdate} id="title" name="title" placeholder="Custom Embroidery"/>

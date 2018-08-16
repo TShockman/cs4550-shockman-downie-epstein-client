@@ -48,7 +48,7 @@ export default class Register extends Component {
     }
 
     return (
-      <Form>
+      <Form className="form-control">
         <FormGroup>
           <Label for="username">Username</Label>
           <Input onChange={this.handleFormUpdate} id="username" name="username" placeholder="Jane_Doe"/>
@@ -70,7 +70,7 @@ export default class Register extends Component {
             <option value="ADMIN">Administrator</option>
           </Input>
         </FormGroup>
-        <Button onClick={this.handleSubmit}>Register</Button>
+        <Button className="btn btn-primary" onClick={this.handleSubmit}>Register</Button>
       </Form>
     );
   }

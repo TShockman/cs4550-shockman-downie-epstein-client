@@ -27,7 +27,7 @@ export default class SearchWorkRequests extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
             <Form>

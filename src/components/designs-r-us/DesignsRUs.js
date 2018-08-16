@@ -33,7 +33,7 @@ export default class DesignsRUs extends Component {
     return (
       <Router>
         <ProviderWithRouter>
-            <div>
+            <div className="container-fluid">
               <DesignsRUsNav/>
               <Switch>
                 <Route exact path="/" component={Homepage}/>

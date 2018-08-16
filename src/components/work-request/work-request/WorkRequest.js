@@ -115,7 +115,7 @@ export default class WorkRequest extends Component {
               {user ?
                 <ListGroupItem>
                   <Input onChange={this.handleChange} type="textarea" placeholder="Wow! Cool!" value={this.state.comment}/>
-                  <Button onClick={this.handleComment}>Comment</Button>
+                  <Button className="btn btn-info" onClick={this.handleComment}>Comment</Button>
                 </ListGroupItem> :
                 <ListGroupItem>Please <Link to="/login">login</Link> to comment.</ListGroupItem>
               }

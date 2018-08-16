@@ -89,7 +89,7 @@ export default class Listing extends Component {
     }
 
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
             <h3>Title</h3>

@@ -89,7 +89,7 @@ export default class BlogPost extends Component {
     }
 
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
             <h3>Title</h3>
@@ -103,7 +103,7 @@ export default class BlogPost extends Component {
             <p>{formatDate(currentBlogPost.modified)}</p>
             <h3>Owner</h3>
             <p><Link to={`/user/${currentBlogPost.owner.id}`}>{currentBlogPost.owner.username}</Link></p>
-            <Button onClick={this.handleMessage}>Message Owner About This Blog Post</Button>
+            <Button className="btn btn-info" onClick={this.handleMessage}>Message Owner About This Blog Post</Button>
           </Col>
         </Row>
         <Row>
@@ -113,7 +113,7 @@ export default class BlogPost extends Component {
               {user ?
                 <ListGroupItem>
                   <Input onChange={this.handleChange} type="textarea" placeholder="Wow! Cool!" value={this.state.comment}/>
-                  <Button onClick={this.handleComment}>Comment</Button>
+                  <Button className="btn btn-primary" onClick={this.handleComment}>Comment</Button>
                 </ListGroupItem> :
                 <ListGroupItem>Please <Link to="/login">login</Link> to comment.</ListGroupItem>
               }

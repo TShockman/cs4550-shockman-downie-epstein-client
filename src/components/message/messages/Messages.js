@@ -70,7 +70,7 @@ export default class Messages extends Component {
     }
 
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
             <Button onClick={this.startDraft} className="btn btn-primary">New Message</Button>
