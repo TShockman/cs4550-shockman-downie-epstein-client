@@ -28,7 +28,7 @@ export default class DesignsRUsNav extends Component {
     return (
       <div>
         <Navbar color="primary" light expand="lg">
-          <Link className="navbar-brand" to="/">Designs R Us</Link>
+            <Link className="navbar-brand" to="/"><i>Designs 'R 'Us</i></Link>
           <NavbarToggler onClick={this.toggle}/>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

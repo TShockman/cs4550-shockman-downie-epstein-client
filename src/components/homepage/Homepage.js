@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {formatDate} from '../../utils';
+import HERO_IMAGE from '../../images/Designs-R-Us.png'
 
 export default class Homepage extends Component {
   static propTypes = {
@@ -24,9 +25,9 @@ export default class Homepage extends Component {
     const {blogPosts} = this.props;
 
     return (
-      <ListGroup>
+      <ListGroup className="list-group">
         {blogPosts.slice(0,5).map(blogPost => (
-          <ListGroupItem key={blogPost.id}>
+          <ListGroupItem className="list-group-item " key={blogPost.id}>
             <strong>{blogPost.title}</strong>
             <span className="float-right">
               <span className="mr-2">{formatDate(blogPost.created)}</span>
@@ -34,11 +35,11 @@ export default class Homepage extends Component {
             </span>
           </ListGroupItem>
         ))}
-        <ListGroupItem>
-          <Link to="/blogPost">All Blog Posts</Link>
+        <ListGroupItem className="list-group-item">
+          <Link className="btn-outline-primary" to="/blogPost">All Blog Posts</Link>
         </ListGroupItem>
-        <ListGroupItem>
-          <Link to="/blogPost/search">Search Blog Posts</Link>
+        <ListGroupItem className="list-group-item">
+          <Link  className="btn-outline-primary" to="/blogPost/search">Search Blog Posts</Link>
         </ListGroupItem>
       </ListGroup>
     );
@@ -48,9 +49,9 @@ export default class Homepage extends Component {
     const {listings} = this.props;
 
     return (
-      <ListGroup>
+      <ListGroup className="list-group">
         {listings.slice(0,5).map(listing => (
-          <ListGroupItem key={listing.id}>
+          <ListGroupItem className="list-group-item" key={listing.id}>
             <strong>{listing.title}</strong>
             <span className="float-right">
               <span className="mr-2">{formatDate(listing.created)}</span>
@@ -58,11 +59,11 @@ export default class Homepage extends Component {
             </span>
           </ListGroupItem>
           ))}
-          <ListGroupItem>
-            <Link to="/listing">All Listings</Link>
+          <ListGroupItem className="list-group-item">
+            <Link  className="btn-outline-primary" to="/listing">All Listings</Link>
           </ListGroupItem>
-          <ListGroupItem>
-            <Link to="/listing/search">Search Listings</Link>
+          <ListGroupItem className="list-group-item">
+            <Link  className="btn-outline-primary" to="/listing/search">Search Listings</Link>
           </ListGroupItem>
       </ListGroup>
     );
@@ -72,9 +73,9 @@ export default class Homepage extends Component {
     const {workRequests} = this.props;
 
     return (
-      <ListGroup>
+      <ListGroup className="list-group">
         {workRequests.slice(0,5).map(workRequest => (
-          <ListGroupItem key={workRequest.id}>
+          <ListGroupItem className="list-group-item" key={workRequest.id}>
             <strong>{workRequest.title}</strong>
             <span className="float-right">
               <span className="mr-2">{formatDate(workRequest.created)}</span>
@@ -82,11 +83,11 @@ export default class Homepage extends Component {
             </span>
           </ListGroupItem>
         ))}
-        <ListGroupItem>
-          <Link to="/workRequest">All Work Requests</Link>
+        <ListGroupItem className="list-group-item">
+          <Link  className="btn-outline-primary" to="/workRequest">All Work Requests</Link>
         </ListGroupItem>
-        <ListGroupItem>
-          <Link to="/workRequest/search">Search Work Requests</Link>
+        <ListGroupItem className="list-group-item">
+          <Link  className="btn-outline-primary" to="/workRequest/search">Search Work Requests</Link>
         </ListGroupItem>
       </ListGroup>
     );
@@ -94,7 +95,15 @@ export default class Homepage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid bg-light">
+          <div className="row">
+              <div className="col-sm-3"></div>
+              <div className="col-sm-6">
+                  <img src={HERO_IMAGE} className="img-fluid " alt="Responsive image" />
+              </div>
+              <div className="col-sm-3"></div>
+
+          </div>
         <Row>
           <Col>
             <h2>Listings</h2>

@@ -40,6 +40,7 @@ export default class Login extends Component {
     }
 
     return (
+    <div className="container-fluid">
       <Form>
         <FormGroup>
           <Label for="username">Username</Label>
@@ -49,8 +50,9 @@ export default class Login extends Component {
           <Label for="password">Password</Label>
           <Input onChange={this.handleFormUpdate} id="password" name="password" type="password" placeholder="***********"/>
         </FormGroup>
-        <Button onClick={this.handleSubmit}>Login</Button>
+        <Button className="btn btn-primary" onClick={this.handleSubmit}>Login</Button>
       </Form>
+    </div>
     );
   }
 }

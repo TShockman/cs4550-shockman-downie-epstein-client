@@ -98,7 +98,7 @@ export default class Listing extends Component {
     }
 
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
             <h3>Title</h3>
@@ -122,14 +122,14 @@ export default class Listing extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group-item-action">
               {currentListing.comments.map(this.getCommentItem)}
               {user ?
-                <ListGroupItem>
+                <ListGroupItem className="list-group-item-action">
                   <Input onChange={this.handleChange} type="textarea" placeholder="Wow! Cool!" value={this.state.comment}/>
                   <Button onClick={this.handleComment}>Comment</Button>
                 </ListGroupItem> :
-                <ListGroupItem>Please <Link to="/login">login</Link> to comment.</ListGroupItem>
+                <ListGroupItem className="list-group-item-action">Please <Link to="/login">login</Link> to comment.</ListGroupItem>
               }
             </ListGroup>
           </Col>

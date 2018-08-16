@@ -77,8 +77,8 @@ export default class BlogPost extends Component {
       return null;
     }
     return (
-      <ListGroup>
-        {srcs.map((src, k) => <ListGroupItem key={k}><img src={src}/></ListGroupItem>)}
+      <ListGroup className="list-group-item-action">
+        {srcs.map((src, k) => <ListGroupItem className="list-group-item-action" key={k}><img src={src}/></ListGroupItem>)}
       </ListGroup>
     )
   };
@@ -98,7 +98,7 @@ export default class BlogPost extends Component {
 
     console.log('USER', user, 'BLOG PSOT', currentBlogPost)
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
             <h3>Title</h3>
@@ -112,7 +112,7 @@ export default class BlogPost extends Component {
             <p>{formatDate(currentBlogPost.modified)}</p>
             <h3>Owner</h3>
             <p><Link to={`/user/${currentBlogPost.owner.id}`}>{currentBlogPost.owner.username}</Link></p>
-            {user && <Button onClick={this.handleMessage}>Message Owner About This Blog Post</Button>}
+            {user && <Button className="btn btn-info" onClick={this.handleMessage}>Message Owner About This Blog Post</Button>}
             {user
               && (user.id === currentBlogPost.owner.id || user.role === 'ADMIN')
               && <Button onClick={this.handleDelete} color="danger">Delete</Button>}
@@ -120,14 +120,14 @@ export default class BlogPost extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group-item-action">
               {currentBlogPost.comments.map(this.getCommentItem)}
               {user ?
-                <ListGroupItem>
+                <ListGroupItem className="list-group-item-action">
                   <Input onChange={this.handleChange} type="textarea" placeholder="Wow! Cool!" value={this.state.comment}/>
-                  <Button onClick={this.handleComment}>Comment</Button>
+                  <Button className="btn btn-primary" onClick={this.handleComment}>Comment</Button>
                 </ListGroupItem> :
-                <ListGroupItem>Please <Link to="/login">login</Link> to comment.</ListGroupItem>
+                <ListGroupItem className="list-group-item-action">Please <Link to="/login">login</Link> to comment.</ListGroupItem>
               }
             </ListGroup>
           </Col>

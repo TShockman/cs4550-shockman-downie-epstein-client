@@ -24,11 +24,11 @@ export default class Profile extends Component {
     const {user, deleteBlogPost} = this.props;
 
     if (!user.blogPosts) {
-      return <ListGroupItem><Loading/></ListGroupItem>;
+      return <ListGroupItem ><Loading/></ListGroupItem>;
     }
 
     return user.blogPosts.map(blogPost => (
-      <ListGroupItem key={blogPost.id}>
+      <ListGroupItem className="list-group-item-action" lassName="list-group-item-action"  key={blogPost.id}>
         {blogPost.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteBlogPost(blogPost.id)}><i className="fa fa-trash"/></Button>
@@ -46,7 +46,7 @@ export default class Profile extends Component {
       return <ListGroupItem><Loading/></ListGroupItem>;
     }
     return user.workRequests.map(workRequest => (
-      <ListGroupItem key={workRequest.id}>
+      <ListGroupItem className="list-group-item-action" key={workRequest.id}>
         {workRequest.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteWorkRequest(workRequest.id)}><i className="fa fa-trash"/></Button>
@@ -61,11 +61,11 @@ export default class Profile extends Component {
     const {user, deleteListing} = this.props;
 
     if (!user.listings) {
-      return <ListGroupItem><Loading/></ListGroupItem>;
+      return <ListGroupItem className="list-group-item-action"><Loading/></ListGroupItem>;
     }
 
     return user.listings.map(listing => (
-      <ListGroupItem key={listing.id}>
+      <ListGroupItem className="list-group-item-action" key={listing.id} className="list-group-item-action">
         {listing.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteListing(listing.id)}><i className="fa fa-trash"/></Button>
@@ -92,7 +92,7 @@ export default class Profile extends Component {
     }
 
     return (
-      <div>
+      <div className="container-fluid">
         <h2>Welcome {user.username}!</h2>
         <Row>
           <Col>
@@ -112,8 +112,8 @@ export default class Profile extends Component {
           {user.role === 'DESIGNER' &&
             <Col>
               <h3>My Listings</h3>
-              <ListGroup>
-                <ListGroupItem>
+              <ListGroup className="list-group-item-action">
+                <ListGroupItem className="list-group-item-action">
                   <Link to="/listing/new">Create New Listing</Link>
                 </ListGroupItem>
                 {this.getListings()}
@@ -123,8 +123,8 @@ export default class Profile extends Component {
           {user.role === 'CLIENT' &&
             <Col>
               <h3>My Work Requests</h3>
-              <ListGroup>
-                <ListGroupItem>
+              <ListGroup className="list-group-item-action">
+                <ListGroupItem className="list-group-item-action">
                   <Link to="/workRequest/new">Create New Work Request</Link>
                 </ListGroupItem>
                 {this.getWorkRequests()}
@@ -134,8 +134,8 @@ export default class Profile extends Component {
           {user.role === 'ADMIN' &&
           <Col>
             <h3>My Blog Posts</h3>
-            <ListGroup>
-              <ListGroupItem>
+            <ListGroup className="list-group-item-action">
+              <ListGroupItem className="list-group-item-action">
                 <Link to="/blogPost/new">Create New Blog Post</Link>
               </ListGroupItem>
               {this.getBlogPosts()}

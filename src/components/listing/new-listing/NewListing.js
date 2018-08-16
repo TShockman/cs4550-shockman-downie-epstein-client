@@ -49,7 +49,7 @@ export default class NewListing extends Component {
     }
 
     return (
-      <Form>
+      <Form className="form-control">
         <FormGroup>
           <Label for="title">Title</Label>
           <Input onChange={this.handleFormUpdate} id="title" name="title" placeholder="Custom Embroidery"/>
@@ -67,7 +67,7 @@ export default class NewListing extends Component {
           <Input onChange={this.handleFormUpdate} id="imageSrcs" name="imageSrcs" type="textarea"/>
           <FormText>One image source URL per line.</FormText>
         </FormGroup>
-        <Button onClick={this.handleSubmit}>Create Listing</Button>
+        <Button className="btn btn-primary" onClick={this.handleSubmit}>Create Listing</Button>
       </Form>
     );
   }

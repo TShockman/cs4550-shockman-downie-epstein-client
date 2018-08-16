@@ -39,7 +39,8 @@ export default class DesignsRUs extends Component {
       <HttpsRedirect>
         <Router>
           <ProviderWithRouter>
-            <div>
+            <div className="container-fluid">
+
               <DesignsRUsNav/>
               <Switch>
                 <Route exact path="/" component={Homepage}/>

@@ -121,14 +121,14 @@ export default class WorkRequest extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group-item-action">
               {currentWorkRequest.comments.map(this.getCommentItem)}
               {user ?
-                <ListGroupItem>
+                <ListGroupItem className="list-group-item-action">
                   <Input onChange={this.handleChange} type="textarea" placeholder="Wow! Cool!" value={this.state.comment}/>
-                  <Button onClick={this.handleComment}>Comment</Button>
-                </ListGroupItem> :
-                <ListGroupItem>Please <Link to="/login">login</Link> to comment.</ListGroupItem>
+                  <Button className="btn btn-info" onClick={this.handleComment}>Comment</Button>
+                </ListGroupItem > :
+                <ListGroupItem className="list-group-item-action">Please <Link to="/login">login</Link> to comment.</ListGroupItem>
               }
             </ListGroup>
           </Col>

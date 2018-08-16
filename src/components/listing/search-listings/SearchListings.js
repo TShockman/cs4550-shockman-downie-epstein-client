@@ -41,9 +41,9 @@ export default class SearchListings extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group-item-action">
               {this.props.listings.map((listing, k) => {
-                return <ListGroupItem key={k}>
+                return <ListGroupItem className="list-group-item-action" key={k}>
                   {listing.title}
                   <Link to={`/listing/${listing.id}`} className="float-right btn btn-primary"><i className="fa fa-arrow-right"/></Link>
                 </ListGroupItem>;

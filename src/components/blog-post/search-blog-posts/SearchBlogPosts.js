@@ -27,10 +27,10 @@ export default class SearchBlogPosts extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <Row>
           <Col>
-            <Form>
+            <Form className="form-control">
               <FormGroup>
                 <Label for="query">Search:</Label>
                 <Input onChange={this.handleChange} id="query" name="query"/>
@@ -41,9 +41,9 @@ export default class SearchBlogPosts extends Component {
         </Row>
         <Row>
           <Col>
-            <ListGroup>
+            <ListGroup className="list-group-item-action">
               {this.props.blogPosts.map((blogPost, k) => {
-                return <ListGroupItem key={k}>
+                return <ListGroupItem className="list-group-item-action"key={k}>
                   {blogPost.title}
                   <Link to={`/blogPost/${blogPost.id}`} className="float-right btn btn-primary"><i className="fa fa-arrow-right"/></Link>
                 </ListGroupItem>;

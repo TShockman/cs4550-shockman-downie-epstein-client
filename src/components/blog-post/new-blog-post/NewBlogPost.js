@@ -47,22 +47,24 @@ export default class NewBlogPost extends Component {
     }
 
     return (
-      <Form>
-        <FormGroup>
-          <Label for="title">Title</Label>
-          <Input onChange={this.handleFormUpdate} id="title" name="title" placeholder="Announcement!"/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="description">Description</Label>
-          <Input onChange={this.handleFormUpdate} id="description" name="description" type="textarea" placeholder="Today we are launching a new feature!"/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="imageSrcs">Image Sources</Label>
-          <Input onChange={this.handleFormUpdate} id="imageSrcs" name="imageSrcs" type="textarea"/>
-          <FormText>One image source URL per line.</FormText>
-        </FormGroup>
-        <Button onClick={this.handleSubmit}>Create Blog Post</Button>
-      </Form>
+        <div className="container-fluid">
+          <Form className="form-control">
+            <FormGroup>
+              <Label for="title">Title</Label>
+              <Input onChange={this.handleFormUpdate} id="title" name="title" placeholder="Announcement!"/>
+            </FormGroup>
+            <FormGroup>
+              <Label for="description">Description</Label>
+              <Input onChange={this.handleFormUpdate} id="description" name="description" type="textarea" placeholder="Today we are launching a new feature!"/>
+            </FormGroup>
+            <FormGroup>
+              <Label for="imageSrcs">Image Sources</Label>
+              <Input onChange={this.handleFormUpdate} id="imageSrcs" name="imageSrcs" type="textarea"/>
+              <FormText>One image source URL per line.</FormText>
+            </FormGroup>
+            <Button onClick={this.handleSubmit}>Create Blog Post</Button>
+          </Form>
+        </div>
     );
   }
 }
