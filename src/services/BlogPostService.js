@@ -1,4 +1,4 @@
-import {BLOG_POST_QUERY_URL, BLOG_POST_URL, USER_URL} from './api';
+import {BLOG_POST_QUERY_URL, BLOG_POST_URL, LISTING_URL, USER_URL} from './api';
 import {parseResponse} from '../utils';
 
 const _singleton = Symbol();
@@ -68,6 +68,16 @@ export default class BlogPostService {
       },
       credentials: 'include',
       body: JSON.stringify(comment)
+    }).then(parseResponse);
+  }
+
+  updateBlogPost(blogPost) {
+    return fetch(`${BLOG_POST_URL}/${blogPost.id}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(blogPost)
     }).then(parseResponse);
   }
 }

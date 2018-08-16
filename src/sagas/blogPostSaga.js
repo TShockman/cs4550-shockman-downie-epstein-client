@@ -1,15 +1,23 @@
 import {takeEvery, takeLatest, put, fork, all, call, select} from 'redux-saga/effects';
 import {
   CREATE_BLOG_POST_FULFILLED,
-  CREATE_BLOG_POST_REQUESTED, CREATE_BP_COMMENT_FULFILLED, CREATE_BP_COMMENT_REQUESTED,
+  CREATE_BLOG_POST_REQUESTED,
+  CREATE_BP_COMMENT_FULFILLED,
+  CREATE_BP_COMMENT_REQUESTED,
   DELETE_BLOG_POST_FULFILLED,
-  DELETE_BLOG_POST_REQUESTED, DELETE_BP_COMMENT_FULFILLED, DELETE_BP_COMMENT_REQUESTED,
+  DELETE_BLOG_POST_REQUESTED,
+  DELETE_BP_COMMENT_FULFILLED,
+  DELETE_BP_COMMENT_REQUESTED,
   GET_ALL_BLOG_POSTS_FULFILLED,
   GET_ALL_BLOG_POSTS_REQUESTED,
   GET_BLOG_POST_FULFILLED,
   GET_BLOG_POST_REQUESTED,
   GET_USER_BLOG_POSTS_FULFILLED,
-  GET_USER_BLOG_POSTS_REQUESTED, QUERY_BLOG_POST_FULFILLED, QUERY_BLOG_POST_REQUESTED
+  GET_USER_BLOG_POSTS_REQUESTED,
+  QUERY_BLOG_POST_FULFILLED,
+  QUERY_BLOG_POST_REQUESTED,
+  UPDATE_BP_FULFILLED,
+  UPDATE_BP_REQUESTED
 } from '../actions/blogPostActions';
 import BlogPostService from '../services/BlogPostService';
 import {redirect} from '../actions/navigationActions';
@@ -17,6 +25,7 @@ import {selectUserState} from '../selectors/userSelector';
 import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 import CommentService from '../services/CommentService';
 import UserService from '../services/UserService';
+import {UPDATE_WR_FULFILLED} from '../actions/workRequestActions';
 
 const blogPostService = BlogPostService.instance;
 const commentService = CommentService.instance;
@@ -128,6 +137,18 @@ function * deleteCommentSaga({cid, bpid}) {
   }
 }
 
+function * updateBlogPostSaga({blogPost}) {
+  console.log('Updating blog post:', blogPost);
+  const updated = yield call(blogPostService.updateBlogPost, blogPost);
+
+  if (updated) {
+    yield put({type: UPDATE_BP_FULFILLED, blogPost: updated});
+    yield put(redirect(`/blogPost/${blogPost.id}`));
+  } else {
+    console.error('Failed to update blog post');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeEvery, GET_BLOG_POST_REQUESTED, getBlogPostSaga),
@@ -137,6 +158,7 @@ export default function * rootSaga () {
     fork(takeLatest, DELETE_BLOG_POST_REQUESTED, deleteBlogPostSaga),
     fork(takeLatest, QUERY_BLOG_POST_REQUESTED, queryBlogPostSaga),
     fork(takeEvery, CREATE_BP_COMMENT_REQUESTED, createCommentSaga),
-    fork(takeEvery, DELETE_BP_COMMENT_REQUESTED, deleteCommentSaga)
+    fork(takeEvery, DELETE_BP_COMMENT_REQUESTED, deleteCommentSaga),
+    fork(takeEvery, UPDATE_BP_REQUESTED, updateBlogPostSaga)
   ])
 }

@@ -2,8 +2,7 @@ import moment from 'moment';
 
 export const parseResponse = response => {
   if (response.ok) {
-    console.log(response.json())
-    return response.json()
+    return response.json();
   }
   return null;
 };

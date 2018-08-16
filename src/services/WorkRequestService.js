@@ -71,4 +71,14 @@ export default class WorkRequestService {
       body: JSON.stringify(comment)
     }).then(parseResponse);
   }
+
+  updateWorkRequest(workRequest) {
+    return fetch(`${WORK_REQUEST_URL}/${workRequest.id}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(workRequest)
+    }).then(parseResponse);
+  }
 }

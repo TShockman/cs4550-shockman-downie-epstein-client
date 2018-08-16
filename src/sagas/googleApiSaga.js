@@ -6,6 +6,7 @@ import {
     SET_USER_LOCATION_FULFILLED
 } from '../actions/googleApiActions';
 import googleService from '../services/GoogleService'
+import {GET_PROFILE_REQUESTED} from '../actions/userActions';
 
 const service = googleService.instance;
 
@@ -15,16 +16,19 @@ function *  getLocation() {
     const location = yield call(service.getLocation);
 
     if (location) {
-        console.log('successfully got location' + location.location);
+        console.log('successfully got location' + JSON.stringify(location.location));
 
         const revGeo = yield call(service.getCity, location.location)
         if (revGeo) {
-            console.log("successfully backtraced geolocation" + revGeo.results.address_components[2]);
+          const cityName = revGeo.results[0].address_components[2].long_name.split("/")[0];
 
-            const finalProduct = yield call(service.setLocation, location.location.lat, location.location.lng, revGeo.results.address_components[2]);
+          console.log("successfully backtraced geolocation" + cityName);
+
+            const finalProduct = yield call(service.setLocation, location.location.lat, location.location.lng, cityName);
             if (finalProduct) {
                 console.log("saved location in DB" + finalProduct);
                 yield put({type: SET_USER_LOCATION_FULFILLED, user: finalProduct});
+                yield put({type: GET_PROFILE_REQUESTED});
             } else {
                 console.log("could not save location in db for some reason");
             }

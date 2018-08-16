@@ -34,7 +34,8 @@ export default class GoogleService {
 
     setLocation(lat, lng, city) {
         return fetch(LOCATION_SET_URL + '/' + city + '/' + lat + '/' + lng, {
-            credentials: 'include'
+            credentials: 'include',
+            method: 'put'
         })
             .then(parseResponse)
     }

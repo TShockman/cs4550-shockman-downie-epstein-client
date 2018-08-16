@@ -32,6 +32,7 @@ export default class Profile extends Component {
         {blogPost.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteBlogPost(blogPost.id)}><i className="fa fa-trash"/></Button>
+          <Link to={`/blogPost/${blogPost.id}/update`} className="btn btn-secondary"><i className="fa fa-pencil"/></Link>
           <Link to={`/blogPost/${blogPost.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
         </span>
       </ListGroupItem>
@@ -49,6 +50,7 @@ export default class Profile extends Component {
         {workRequest.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteWorkRequest(workRequest.id)}><i className="fa fa-trash"/></Button>
+          <Link to={`/workRequest/${workRequest.id}/update`} className="btn btn-secondary"><i className="fa fa-pencil"/></Link>
           <Link to={`/workRequest/${workRequest.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
         </span>
       </ListGroupItem>
@@ -67,14 +69,23 @@ export default class Profile extends Component {
         {listing.title}
         <span className="float-right">
           <Button color="danger" onClick={() => deleteListing(listing.id)}><i className="fa fa-trash"/></Button>
+          <Link to={`/listing/${listing.id}/update`} className="btn btn-secondary"><i className="fa fa-pencil"/></Link>
           <Link to={`/listing/${listing.id}`} className="btn btn-primary"><i className="fa fa-arrow-right"/></Link>
         </span>
       </ListGroupItem>
     ));
   };
 
+  handleDelete = () => {
+    const {deleteAccount} = this.props;
+    const confirmed = window.confirm('Are you sure you want to delete your account? This is permanent.');
+    if (confirmed) {
+      deleteAccount()
+    }
+  };
+
   render() {
-    const {user, logout, deleteAccount} = this.props;
+    const {user, logout, setLocation} = this.props;
 
     if (!user) {
       return <Loading/>;
@@ -86,11 +97,17 @@ export default class Profile extends Component {
         <Row>
           <Col>
             <h3>User Actions</h3>
-            Current Location: {this.props.user.city}
-              <Button onClick={setLocation}>Set Location</Button>
             <Button onClick={logout}>Logout</Button>
-            <Button color="danger" onClick={deleteAccount}>Delete Account</Button>
+            <Button color="danger" onClick={this.handleDelete}>Delete Account</Button>
             <Link to="/profile/message" className="btn btn-primary">Messages</Link>
+            <Link to="/profile/update" className="btn btn-warning">Update Profile</Link>
+          </Col>
+          <Col>
+            <h3>User Information</h3>
+            <p><strong>Username: </strong>{user.username}</p>
+            <p><strong>Name: </strong>{user.name}</p>
+            <p><strong>Date of Birth: </strong>{user.dateOfBirth}</p>
+            <p><strong>Location: </strong>{user.city} <Button onClick={setLocation}>Update Location</Button></p>
           </Col>
           {user.role === 'DESIGNER' &&
             <Col>

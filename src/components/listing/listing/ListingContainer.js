@@ -3,11 +3,12 @@ import Listing from './Listing';
 import {selectListingState} from '../../../selectors/listingSelector';
 import {
   CREATE_L_COMMENT_REQUESTED,
-  DELETE_L_COMMENT_REQUESTED,
+  DELETE_L_COMMENT_REQUESTED, DELETE_LISTING_REQUESTED,
   GET_LISTING_REQUESTED
 } from '../../../actions/listingActions';
 import {selectUserState} from '../../../selectors/userSelector';
 import {DRAFT_MESSAGE} from '../../../actions/messageActions';
+import {GET_PROFILE_REQUESTED} from '../../../actions/userActions';
 
 
 function mapStateToProps(state) {
@@ -40,6 +41,13 @@ function mapDispatchToProps(dispatch) {
       type: DRAFT_MESSAGE,
       to,
       message
+    }),
+    getProfile: () => dispatch({
+      type: GET_PROFILE_REQUESTED
+    }),
+    deleteListing: lid => dispatch({
+      type: DELETE_LISTING_REQUESTED,
+      lid
     })
   };
 }

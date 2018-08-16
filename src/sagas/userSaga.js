@@ -7,7 +7,7 @@ import {
   LOGIN_USER_REQUESTED,
   LOGOUT,
   REGISTER_USER_FULFILLED,
-  REGISTER_USER_REQUESTED
+  REGISTER_USER_REQUESTED, UPDATE_PROFILE_FULFILLED, UPDATE_PROFILE_REQUESTED
 } from '../actions/userActions';
 import UserService from '../services/UserService';
 import {redirect} from '../actions/navigationActions';
@@ -81,12 +81,26 @@ function * deleteAccount() {
   yield put(redirect('/register'));
 }
 
+function * updateProfile({user}) {
+  console.log('Updating profile:', user);
+
+  const updated = yield call(userService.updateProfile, user);
+  if (updated) {
+    yield put({type: UPDATE_PROFILE_FULFILLED, user: updated});
+    yield put({type: GET_PROFILE_REQUESTED});
+    yield put(redirect('/profile'));
+  } else {
+    console.log('Failed to update profile');
+  }
+}
+
 export default function * rootSaga () {
   yield all([
     fork(takeLatest, REGISTER_USER_REQUESTED, registerUser),
     fork(takeLatest, LOGIN_USER_REQUESTED, loginUser),
     fork(takeLatest, GET_PROFILE_REQUESTED, getProfile),
     fork(takeLatest, LOGOUT, logout),
-    fork(takeLatest, DELETE_PROFILE, deleteAccount)
+    fork(takeLatest, DELETE_PROFILE, deleteAccount),
+    fork(takeLatest, UPDATE_PROFILE_REQUESTED, updateProfile)
   ]);
 }
